@@ -33,7 +33,7 @@ body.has-header-image.home.blog.wp-custom-logo .custom-logo-link {
 	.has-header-video.twentyseventeen-front-page.wp-custom-logo .site-branding,
 	.has-header-image.home.blog.wp-custom-logo .site-branding,
 	.has-header-video.home.blog.wp-custom-logo .site-branding {
-		  bottom: 10%;
+		  bottom: 0;
 	}
 }
 
