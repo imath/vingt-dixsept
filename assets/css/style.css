@@ -1,4 +1,7 @@
 /** Child stylesheet */
-body {
-	background-color: red;
+
+@supports ( object-fit: cover ) {
+	.has-header-image:not(.twentyseventeen-front-page):not(.home) .custom-header-media img {
+		height: auto;
+	}
 }
