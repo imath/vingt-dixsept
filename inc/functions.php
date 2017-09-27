@@ -51,6 +51,48 @@ function vingt_dixsept_register_email_type() {
 add_action( 'init', 'vingt_dixsept_register_email_type' );
 
 /**
+ * Display the site logo into the email.
+ *
+ * @since  1.0.0
+ *
+ * @return string HTML Output.
+ */
+function vingt_dixsept_email_logo() {
+	if ( ! has_custom_logo() ) {
+		return;
+	}
+	?>
+	<div id="site-logo">
+		<?php the_custom_logo(); ?>
+	</div>
+	<?php
+}
+
+function vingt_dixsept_email_line_color() {
+	return '#222';
+}
+
+function vingt_dixsept_email_text_color() {
+	return '#555';
+}
+
+function vingt_dixsept_email_print_css() {
+	/**
+	 * Filter here to replace the base email stylerules.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string Absolute file to the css file.
+	 */
+	$css = get_parent_theme_file_uri( 'assets/css/editor-style.css' );
+
+	// Directly insert it into the email template.
+	if ( file_exists( $css ) ) {
+		include( $css );
+	}
+}
+
+/**
  * Upgrade the theme db version
  *
  * @since  1.0.0
