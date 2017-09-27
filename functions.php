@@ -69,7 +69,6 @@ final class VingtDixSept {
 		require_once get_theme_file_path( '/inc/customizer.php' );
 	}
 }
-
 /**
  * Start the ClusterTheme
  *

@@ -21,11 +21,40 @@ function vingt_dixsept_custom_header_args( $args = array() ) {
 }
 add_filter( 'twentyseventeen_custom_header_args', 'vingt_dixsept_custom_header_args', 10, 1 );
 
- /**
-  * Upgrade the theme db version
-  *
-  * @since  1.0.0
-  */
+function vingt_dixsept_js_css_suffix() {
+	$min = '.min';
+
+	if ( defined( 'SCRIPT_DEBUG' ) && true === SCRIPT_DEBUG )  {
+		$min = '';
+	}
+
+	return apply_filters( 'vingt_dixsept_js_css_suffix_suffix', $min );
+}
+
+function vingt_dixsept_register_email_type() {
+	register_post_type(
+		'vingt_dixsept_email',
+		array(
+			'label'              => 'vingt_dixsept_email',
+			'public'             => true,
+			'publicly_queryable' => true,
+			'show_ui'            => false,
+			'show_in_menu'       => false,
+			'show_in_nav_menus'  => false,
+			'query_var'          => false,
+			'rewrite'            => false,
+			'has_archive'        => false,
+			'hierarchical'       => true,
+		)
+	);
+}
+add_action( 'init', 'vingt_dixsept_register_email_type' );
+
+/**
+ * Upgrade the theme db version
+ *
+ * @since  1.0.0
+ */
 function vingt_dixsept_upgrade() {
 	if ( is_customize_preview() ) {
 		return;
