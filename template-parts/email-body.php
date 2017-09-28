@@ -20,21 +20,21 @@
 				<!-- 600px container (white background) -->
 				<table border="0" width="600" cellpadding="0" cellspacing="0" class="container" style="width:600px;max-width:600px;">
 					<tr>
-						<td class="container-padding header" align="left" style="font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;background-color: #23282d;padding-bottom:12px;padding-left:24px;padding-right:24px">
+						<td class="container-padding header" align="left" style="font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;padding-bottom:12px;padding-left:24px;padding-right:24px">
 							<table cellpadding="0" cellspacing="0" border="0">
 								<tr>
 									<?php if ( ! get_theme_mod( 'disable_email_logo' ) ) : ?>
 										<td width="60px" height="60px"><?php vingt_dixsept_email_logo() ;?></td>
-										<td height="60px" style="font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;font-size:48px;font-weight:bold;vertical-align:middle;padding-left:16px;color:#ffffff"><?php bloginfo( 'name' ); ?></td>
+										<td height="60px" style="font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;font-size:48px;font-weight:bold;vertical-align:middle;padding-left:16px;color:#555"><?php bloginfo( 'name' ); ?></td>
 									<?php else : ?>
-										<td height="60px" style="font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;font-size:48px;font-weight:bold;vertical-align:middle;padding-left:8px;color:#ffffff"><?php bloginfo( 'name' ); ?></td>
+										<td height="60px" style="font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;font-size:48px;font-weight:bold;vertical-align:middle;padding-left:8px;color:#555"><?php bloginfo( 'name' ); ?></td>
 									<?php endif; ?>
 								</tr>
 							</table>
 						</td>
 					</tr>
 					<tr>
-						<td class="container-padding content" align="left" style="padding-left:24px;padding-right:24px;padding-top:12px;padding-bottom:12px;background-color:#ffffff; border-top: 8px solid <?php vingt_dixsept_email_line_color(); ?>;">
+						<td class="container-padding content" align="left" style="padding-left:24px;padding-right:24px;padding-top:12px;padding-bottom:12px;<?php echo ( 'dark' === get_theme_mod( 'colorscheme' ) ) ? 'background-color:#222' : 'background-color:#fff'; ?>; border-top: 8px solid <?php vingt_dixsept_email_line_color(); ?>;">
 <div class="body-text" style="font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;font-size:14px;line-height:20px;text-align:left;color:<?php vingt_dixsept_email_text_color(); ?>">
 	<?php if ( is_customize_preview() && get_the_content() ) :
 

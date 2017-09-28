@@ -69,11 +69,33 @@ function vingt_dixsept_email_logo() {
 }
 
 function vingt_dixsept_email_line_color() {
-	return '#222';
+	echo get_theme_mod( 'email_header_line_color', 'default' );
 }
 
 function vingt_dixsept_email_text_color() {
-	return '#555';
+	$color         = get_theme_mod( 'email_body_text_color', 'default' );
+	$default_color = vingt_dixsept_email_get_default_color();
+
+	if ( '#333' !== $default_color && $color === '#555' ) {
+		$color = $default_color;
+	}
+
+	echo $color;
+}
+
+function vingt_dixsept_email_get_default_color() {
+	$colorscheme = get_theme_mod( 'colorscheme' );
+	$hexcolor    = '#333';
+
+	if ( ! $colorscheme || 'light' === $colorscheme ) {
+		return $hexcolor;
+	}
+
+	if ( 'dark' === $colorscheme ) {
+		$hexcolor = '#eee';
+	}
+
+	return $hexcolor;
 }
 
 function vingt_dixsept_email_print_css() {
@@ -84,11 +106,42 @@ function vingt_dixsept_email_print_css() {
 	 *
 	 * @param string Absolute file to the css file.
 	 */
-	$css = get_parent_theme_file_uri( 'assets/css/editor-style.css' );
+	$css = apply_filters( 'vingt_dixsept_email_email_get_css', sprintf( '/%1$semail%2$s.css',
+		get_theme_file_path( '/assets' ),
+		vingt_dixsept_js_css_suffix()
+	) );
 
 	// Directly insert it into the email template.
-	if ( file_exists( $css ) ) {
+	if ( $css && file_exists( $css ) ) {
 		include( $css );
+	}
+
+	$default_color = vingt_dixsept_email_get_default_color();
+	$link_color    = get_theme_mod( 'email_body_link_color' );
+
+	if ( ! $link_color && '#333' !== $default_color ) {
+		$link_color = $default_color;
+	}
+
+	// Add css overrides for the links
+	if ( '#222' !== $link_color ) {
+		printf( '
+			a,
+			a:hover,
+			a:visited,
+			a:active {
+				color: %s;
+			}
+		', esc_attr( $link_color ) );
+	}
+
+	// Add css overrides for the text color of the header
+	if ( is_customize_preview() ) {
+		echo '
+			tr { border-bottom: none; }
+			table { margin: 0; }
+			a { text-decoration: underline !important; }
+		';
 	}
 }
 
