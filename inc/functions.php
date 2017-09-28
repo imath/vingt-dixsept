@@ -51,6 +51,100 @@ function vingt_dixsept_register_email_type() {
 add_action( 'init', 'vingt_dixsept_register_email_type' );
 
 /**
+ * Use a template to render emails
+ *
+ * @since  1.0.0
+ *
+ * @param  string       $text The text of the email.
+ * @return string|false       The html text for the email, or false.
+ */
+function vingt_dixsept_email_set_html_content( $text ) {
+	if ( empty( $text ) ) {
+		return false;
+	}
+
+	ob_start();
+	get_template_part( 'email' );
+	$email_template = ob_get_clean();
+
+	if ( empty( $email_template ) ) {
+		return false;
+	}
+
+	// Make sure the link to set or reset the password
+	// will be clickable in text/html
+	if ( did_action( 'retrieve_password_key' ) ) {
+		preg_match( '/<(.+?)>/', $text, $match );
+
+		if ( ! empty( $match[1] ) ) {
+
+			$login_url = wp_login_url();
+			$link      = "\n" . '<a href="' . $match[1] . '">' . $login_url . '</a>';
+
+			if ( preg_match( '/[^<]' . addcslashes( $login_url, '/' ) . '/', $text ) ) {
+				$text = preg_replace( '/[^<]' . addcslashes( $login_url, '/' ) . '/', $link, $text );
+			} else {
+				$text .= $link;
+			}
+
+			$text = str_replace( $match[0], '', $text );
+		}
+	}
+
+	$pagetitle = esc_attr( get_bloginfo( 'name', 'display' ) );
+	$content   = apply_filters( 'the_content', $text );
+
+	// Make links clickable
+	$content = make_clickable( $content );
+
+	$email = str_replace( '{{pagetitle}}', $pagetitle, $email_template );
+	$email = str_replace( '{{content}}',   $content,   $email          );
+
+	return $email;
+}
+
+/**
+ * Use a multipart/alternate email.
+ *
+ * NB: follow the progress made on
+ * https://core.trac.wordpress.org/ticket/15448
+ *
+ * @since 1.0.0
+ *
+ * @param PHPMailer $phpmailer The Mailer class.
+ */
+function vingt_dixsept_email( PHPMailer $phpmailer ) {
+	if ( empty( $phpmailer->Body ) ) {
+		return;
+	}
+
+	$html_content = vingt_dixsept_email_set_html_content( $phpmailer->Body );
+
+	if ( $html_content ) {
+		$phpmailer->AltBody = $phpmailer->Body;
+		$phpmailer->Body    = $html_content;
+	}
+}
+add_action( 'phpmailer_init', 'vingt_dixsept_email', 10, 1 );
+
+function vingt_dixsept_email_logo_size( $image = array() ) {
+	if ( isset( $image[1] ) && isset( $image[2] ) ) {
+		$width  = $image[1];
+		$height = $image[2];
+
+		if ( $width > $height ) {
+			$image[2] = floor( ( $height/ $width ) * 60 );
+			$image[1] = 60;
+		} else {
+			$image[1] = floor( ( $width / $height ) * 60 );
+			$image[2] = 60;
+		}
+	}
+
+	return $image;
+}
+
+/**
  * Display the site logo into the email.
  *
  * @since  1.0.0
@@ -61,41 +155,129 @@ function vingt_dixsept_email_logo() {
 	if ( ! has_custom_logo() ) {
 		return;
 	}
+
+	add_filter( 'wp_get_attachment_image_src', 'vingt_dixsept_email_logo_size', 10, 1 );
 	?>
 	<div id="site-logo">
 		<?php the_custom_logo(); ?>
 	</div>
 	<?php
+
+	remove_filter( 'wp_get_attachment_image_src', 'vingt_dixsept_email_logo_size', 10, 1 );
 }
 
-function vingt_dixsept_email_line_color() {
-	echo get_theme_mod( 'email_header_line_color', 'default' );
+/**
+ * Display the site name into the email.
+ *
+ * @since  1.0.0
+ *
+ * @return string HTML Output.
+ */
+function vingt_dixsept_email_sitename() {
+	$name = get_bloginfo( 'name' );
+	
+	if ( ! $name ) {
+		return;
+	}
+	
+	echo esc_html( $name );
 }
 
-function vingt_dixsept_email_text_color() {
-	$color         = get_theme_mod( 'email_body_text_color', 'default' );
-	$default_color = vingt_dixsept_email_get_default_color();
+function vingt_dixsept_email_get_scheme_colors() {
+	$hue = absint( get_theme_mod( 'colorscheme_hue', 250 ) );
 
-	if ( '#333' !== $default_color && $color === '#555' ) {
-		$color = $default_color;
-	}
+	/**
+	 * Filter Twenty Seventeen default saturation level.
+	 *
+	 * @since Twenty Seventeen 1.0
+	 *
+	 * @param int $saturation Color saturation level.
+	 */
+	$saturation = absint( apply_filters( 'twentyseventeen_custom_colors_saturation', 50 ) );
+	$reduced_saturation = ( .8 * $saturation ) . '%';
+	$saturation = $saturation . '%';
+	$base_hsl   = 'hsl( ' . $hue . ', %1$s, %2$s )';
 
-	echo $color;
+
+	return apply_filters( 'vingt_dixsept_email_get_scheme_colors',  array(
+		'light' => array(
+			'title_text' => '#333',
+			'title_bg'   => '#FFF',
+			'separator'  => '#222',
+			'body_text'  => '#333',
+			'body_link'  => '#222',
+			'body_bg'    => '#FFF',
+		),
+		'dark' => array(
+			'title_text' => '#FFF',
+			'title_bg'   => '#222',
+			'separator'  => '#333',
+			'body_text'  => '#333',
+			'body_link'  => '#222',
+			'body_bg'    => '#FFF',
+		),
+		'custom' => array(
+			'title_text' => sprintf( $base_hsl, $reduced_saturation, '20%' ),
+			'title_bg'   => '#FFF',
+			'separator'  => sprintf( $base_hsl, $saturation, '20%' ),
+			'body_text'  => '#333',
+			'body_link'  => sprintf( $base_hsl, $saturation, '20%' ),
+			'body_bg'    => '#FFF',
+		),
+	) );
 }
 
-function vingt_dixsept_email_get_default_color() {
-	$colorscheme = get_theme_mod( 'colorscheme' );
-	$hexcolor    = '#333';
+function vingt_dixsept_email_colors( $part = '' ) {
+	$vds = vingt_dixsept();
+	$sc  = vingt_dixsept_email_get_scheme_colors();
 
-	if ( ! $colorscheme || 'light' === $colorscheme ) {
-		return $hexcolor;
+	if ( ! isset( $vds->email_colors ) ) {
+		$colorscheme = get_theme_mod( 'colorscheme', 'default' );
+		
+		$vds->email_colors = $sc[ $colorscheme ];
 	}
 
-	if ( 'dark' === $colorscheme ) {
-		$hexcolor = '#eee';
+	if ( ! $part ) {
+		return $vds->email_colors;
 	}
 
-	return $hexcolor;
+	if ( ! isset( $vds->email_colors[ $part ] ) ) {
+		return '#FFF';
+	}
+
+	return $vds->email_colors[ $part ];
+}
+
+function vingt_dixsept_email_title_text_color() {
+	$title_color = get_theme_mod( 'header_textcolor', 'blank' );
+
+	if ( ! $title_color || 'blank' === $title_color ) {
+		$title_color = vingt_dixsept_email_colors( 'title_text' );
+	} else {
+		$title_color = '#' . $title_color;
+	}
+
+	echo $title_color;
+}
+
+function vingt_dixsept_email_title_bg_color() {
+	echo vingt_dixsept_email_colors( 'title_bg' );
+}
+
+function vingt_dixsept_email_separator_color() {
+	echo vingt_dixsept_email_colors( 'separator' );
+}
+
+function vingt_dixsept_email_body_text_color() {
+	echo vingt_dixsept_email_colors( 'body_text' );
+}
+
+function vingt_dixsept_email_body_link_color() {
+	echo vingt_dixsept_email_colors( 'body_link' );
+}
+
+function vingt_dixsept_email_body_bg_color() {
+	echo vingt_dixsept_email_colors( 'body_bg' );
 }
 
 function vingt_dixsept_email_print_css() {
@@ -116,12 +298,7 @@ function vingt_dixsept_email_print_css() {
 		include( $css );
 	}
 
-	$default_color = vingt_dixsept_email_get_default_color();
-	$link_color    = get_theme_mod( 'email_body_link_color' );
-
-	if ( ! $link_color && '#333' !== $default_color ) {
-		$link_color = $default_color;
-	}
+	$link_color = vingt_dixsept_email_colors( 'body_link' );
 
 	// Add css overrides for the links
 	if ( '#222' !== $link_color ) {

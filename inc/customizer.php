@@ -43,41 +43,22 @@ function vingt_dixsept_customize_register( $wp_customize ) {
 		'active_callback' => 'vingt_dixsept_has_custom_logo',
 	) );
 
-	// Allow the admin to customize the header's under line color.
-	$wp_customize->add_setting( 'email_header_line_color', array(
-		'default'           => '#ccc',
-		'sanitize_callback' => 'sanitize_hex_color',
+	// Allow the admin to disable the email sitename
+	$wp_customize->add_setting( 'disable_email_sitename', array(
+		'default'           => 0,
+		'sanitize_callback' => 'absint',
 		'transport'         => 'refresh',
 	) );
 
-	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'email_header_line_color', array(
-		'label'       => __( 'Couleur de soulignement de l\'entête', 'vingt-dixsept' ),
-		'section'     => 'theme_email',
-	) ) );
-
-	// Allow the admin to customize the links color.
-	$wp_customize->add_setting( 'email_body_link_color', array(
-		'default'           => '#222',
-		'sanitize_callback' => 'sanitize_hex_color',
-		'transport'         => 'refresh',
+	$wp_customize->add_control( 'disable_email_sitename', array(
+		'label'           => __( 'Intégrer le nom du site dans l\'email', 'vingt-dixsept' ),
+		'section'         => 'theme_email',
+		'type'            => 'radio',
+		'choices'         => array(
+			0 => __( 'Oui', 'vingt-dixsept' ),
+			1 => __( 'Non', 'vingt-dixsept' ),
+		),
 	) );
-
-	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'email_body_link_color', array(
-		'label'       => __( 'Couleur des liens', 'vingt-dixsept' ),
-		'section'     => 'theme_email',
-	) ) );
-
-	// Allow the admin to customize the text color.
-	$wp_customize->add_setting( 'email_body_text_color', array(
-		'default'           => '#555',
-		'sanitize_callback' => 'sanitize_hex_color',
-		'transport'         => 'refresh',
-	) );
-
-	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'email_body_text_color', array(
-		'label'       => __( 'Couleur du texte', 'vingt-dixsept' ),
-		'section'     => 'theme_email',
-	) ) );
 }
  add_action( 'customize_register', 'vingt_dixsept_customize_register'  );
 
