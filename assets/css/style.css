@@ -37,6 +37,16 @@ body.has-header-image.home.blog.wp-custom-logo .custom-logo-link {
 	}
 }
 
+/* Hides English text by default */
+.en-text {
+	display: none;
+}
+
+/* Show it when the target is matching its id attributes */
+.en-text:target {
+	display: block;
+}
+
 @supports ( object-fit: cover ) {
 	.has-header-image:not(.twentyseventeen-front-page):not(.home) .custom-header-media img {
 		height: auto;
