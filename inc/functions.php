@@ -7,20 +7,13 @@
  * @since  1.0.0
  */
 
-function vingt_dixsept_enqueue_styles() {
-	wp_register_style( 'parent-style', get_template_directory_uri() . '/style.css' );
-
-	wp_enqueue_style( 'child-style', get_stylesheet_directory_uri() . '/assets/css/style.css', array( 'parent-style' ) );
-}
-add_action( 'wp_enqueue_scripts', 'vingt_dixsept_enqueue_styles' );
-
-function vingt_dixsept_custom_header_args( $args = array() ) {
-	$args['default-image'] = get_theme_file_uri( '/assets/images/header.jpg' );
-
-	return $args;
-}
-add_filter( 'twentyseventeen_custom_header_args', 'vingt_dixsept_custom_header_args', 10, 1 );
-
+/**
+ * Gets the min suffix for CSS & JS.
+ *
+ * @since 1.0.0
+ *
+ * @return string The min suffix for CSS & JS.
+ */
 function vingt_dixsept_js_css_suffix() {
 	$min = '.min';
 
@@ -28,9 +21,58 @@ function vingt_dixsept_js_css_suffix() {
 		$min = '';
 	}
 
+	/**
+	 * Filter here to edit the min suffix.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $min The min suffix for CSS & JS.
+	 */
 	return apply_filters( 'vingt_dixsept_js_css_suffix_suffix', $min );
 }
 
+/**
+ * Enqueues the Child Theme's specific CSS.
+ *
+ * @since 1.0.0
+ */
+function vingt_dixsept_enqueue_styles() {
+	$min = vingt_dixsept_js_css_suffix();
+	$vs  = vingt_dixsept();
+
+	// Register the TwentySeventeen stylesheet to use it as a dependancy.
+	wp_register_style( 'parent-style', get_template_directory_uri() . '/style.css' );
+
+	// Enqueue the Child theme's stylesheet.
+	wp_enqueue_style(
+		'child-style',
+		get_stylesheet_directory_uri() . "/assets/css/style{$min}.css",
+		array( 'parent-style' ),
+		$vs->version
+	);
+}
+add_action( 'wp_enqueue_scripts', 'vingt_dixsept_enqueue_styles' );
+
+/**
+ * Use this Child Theme's default header instead of the TwentySeventeen's one.
+ *
+ * @since 1.0.0
+ *
+ * @param  array  $args The custom header arguments.
+ * @return array        The custom header arguments.
+ */
+function vingt_dixsept_custom_header_args( $args = array() ) {
+	$args['default-image'] = get_theme_file_uri( '/assets/images/header.jpg' );
+
+	return $args;
+}
+add_filter( 'twentyseventeen_custom_header_args', 'vingt_dixsept_custom_header_args', 10, 1 );
+
+/**
+ * Registers a private Post Type to use for the email sample.
+ *
+ * @since 1.0.0
+ */
 function vingt_dixsept_register_email_type() {
 	register_post_type(
 		'vingt_dixsept_email',
@@ -51,7 +93,7 @@ function vingt_dixsept_register_email_type() {
 add_action( 'init', 'vingt_dixsept_register_email_type' );
 
 /**
- * Use a template to render emails
+ * Uses a template to render emails
  *
  * @since  1.0.0
  *
@@ -104,7 +146,7 @@ function vingt_dixsept_email_set_html_content( $text ) {
 }
 
 /**
- * Use a multipart/alternate email.
+ * Uses a multipart/alternate email.
  *
  * NB: follow the progress made on
  * https://core.trac.wordpress.org/ticket/15448
@@ -127,6 +169,14 @@ function vingt_dixsept_email( PHPMailer $phpmailer ) {
 }
 add_action( 'phpmailer_init', 'vingt_dixsept_email', 10, 1 );
 
+/**
+ * Makes sure the Logo is 60px wide or tall into the email's header.
+ *
+ * @since 1.0.0
+ *
+ * @param  array  $image An array containing the src, width and height in pixels of the image.
+ * @return array         An array containing the src, width and height in pixels of the image.
+ */
 function vingt_dixsept_email_logo_size( $image = array() ) {
 	if ( isset( $image[1] ) && isset( $image[2] ) ) {
 		$width  = $image[1];
@@ -145,17 +195,16 @@ function vingt_dixsept_email_logo_size( $image = array() ) {
 }
 
 /**
- * Display the site logo into the email.
+ * Displays the site logo into the email.
  *
  * @since  1.0.0
- *
- * @return string HTML Output.
  */
 function vingt_dixsept_email_logo() {
 	if ( ! has_custom_logo() ) {
 		return;
 	}
 
+	// Filter just before the custom logo tag to control its size in pixels.
 	add_filter( 'wp_get_attachment_image_src', 'vingt_dixsept_email_logo_size', 10, 1 );
 	?>
 	<div id="site-logo">
@@ -163,15 +212,14 @@ function vingt_dixsept_email_logo() {
 	</div>
 	<?php
 
+	// Stop filtering once it's no more needed.
 	remove_filter( 'wp_get_attachment_image_src', 'vingt_dixsept_email_logo_size', 10, 1 );
 }
 
 /**
- * Display the site name into the email.
+ * Displays the site name into the email.
  *
  * @since  1.0.0
- *
- * @return string HTML Output.
  */
 function vingt_dixsept_email_sitename() {
 	$name = get_bloginfo( 'name' );
@@ -183,6 +231,13 @@ function vingt_dixsept_email_sitename() {
 	echo esc_html( $name );
 }
 
+/**
+ * Gets a color map for the TwentySeventeen colorscheme.
+ *
+ * @since 1.0.0
+ *
+ * @return array The color map for the TwentySeventeen colorscheme.
+ */
 function vingt_dixsept_email_get_scheme_colors() {
 	$hue = absint( get_theme_mod( 'colorscheme_hue', 250 ) );
 
@@ -198,7 +253,13 @@ function vingt_dixsept_email_get_scheme_colors() {
 	$saturation = $saturation . '%';
 	$base_hsl   = 'hsl( ' . $hue . ', %1$s, %2$s )';
 
-
+	/**
+	 * Use this filter to edit the color map.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $value The color map for the TwentySeventeen colorscheme.
+	 */
 	return apply_filters( 'vingt_dixsept_email_get_scheme_colors',  array(
 		'light' => array(
 			'title_text' => '#333',
@@ -227,6 +288,14 @@ function vingt_dixsept_email_get_scheme_colors() {
 	) );
 }
 
+/**
+ * Gets a specific area's color or all areas colors.
+ *
+ * @since 1.0.0
+ *
+ * @param  string $part The specific area's color key.
+ * @return array        A specific area's color or all areas colors.
+ */
 function vingt_dixsept_email_colors( $part = '' ) {
 	$vds = vingt_dixsept();
 	$sc  = vingt_dixsept_email_get_scheme_colors();
@@ -248,6 +317,11 @@ function vingt_dixsept_email_colors( $part = '' ) {
 	return $vds->email_colors[ $part ];
 }
 
+/**
+ * Outputs the Email's title color.
+ *
+ * @since 1.0.0
+ */
 function vingt_dixsept_email_title_text_color() {
 	$title_color = get_theme_mod( 'header_textcolor', 'blank' );
 
@@ -260,6 +334,11 @@ function vingt_dixsept_email_title_text_color() {
 	echo $title_color;
 }
 
+/**
+ * Outputs the Email's title background color.
+ *
+ * @since 1.0.0
+ */
 function vingt_dixsept_email_title_bg_color() {
 	$header_bg_color = get_theme_mod( 'header_background_color' );
 
@@ -270,6 +349,11 @@ function vingt_dixsept_email_title_bg_color() {
 	echo $header_bg_color;
 }
 
+/**
+ * Outputs the Email's header underline color.
+ *
+ * @since 1.0.0
+ */
 function vingt_dixsept_email_separator_color() {
 	$separator_color = get_theme_mod( 'header_line_color' );
 
@@ -280,21 +364,41 @@ function vingt_dixsept_email_separator_color() {
 	echo $separator_color;
 }
 
+/**
+ * Outputs the Email's body text color.
+ *
+ * @since 1.0.0
+ */
 function vingt_dixsept_email_body_text_color() {
 	echo vingt_dixsept_email_colors( 'body_text' );
 }
 
+/**
+ * Outputs the Email's link color.
+ *
+ * @since 1.0.0
+ */
 function vingt_dixsept_email_body_link_color() {
 	echo vingt_dixsept_email_colors( 'body_link' );
 }
 
+/**
+ * Outputs the Email's body background color.
+ *
+ * @since 1.0.0
+ */
 function vingt_dixsept_email_body_bg_color() {
 	echo vingt_dixsept_email_colors( 'body_bg' );
 }
 
+/**
+ * Prints the content of the CSS file used to style the emails.
+ *
+ * @since 1.0.0
+ */
 function vingt_dixsept_email_print_css() {
 	/**
-	 * Filter here to replace the base email stylerules.
+	 * Filter here to replace the base email CSS rules.
 	 *
 	 * @since 1.0.0
 	 *
@@ -330,6 +434,7 @@ function vingt_dixsept_email_print_css() {
 			tr { border-bottom: none; }
 			table { margin: 0; }
 			a { text-decoration: underline !important; }
+			.container-padding.header a.custom-logo-link { padding: 0; }
 		';
 	}
 }
