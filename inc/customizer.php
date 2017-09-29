@@ -7,7 +7,6 @@
  * @since  1.0.0
  */
 
-
  // Exit if accessed directly.
  defined( 'ABSPATH' ) || exit;
 
@@ -59,8 +58,42 @@ function vingt_dixsept_customize_register( $wp_customize ) {
 			1 => __( 'Non', 'vingt-dixsept' ),
 		),
 	) );
+
+	// Default values for the following settings.
+	$colorsheme = $wp_customize->get_setting( 'colorscheme' )->value();
+	$d_bg_color   = '#FFF';
+	$d_line_color = '#222';
+
+	if ( 'light' !== $colorsheme ) {
+		$d_bg_color   = '#222';
+		$d_line_color = '#333';
+	}
+
+	// Allow the admin to customize the header's background color.
+	$wp_customize->add_setting( 'header_background_color', array(
+		'default'           => $d_bg_color,
+		'sanitize_callback' => 'sanitize_hex_color',
+		'transport'         => 'refresh',
+	) );
+
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'header_background_color', array(
+		'label'       => __( 'Couleur d\'arrière plan de l\'entête', 'vingt-dixsept' ),
+		'section'     => 'theme_email',
+	) ) );
+
+	// Allow the admin to customize the header's underline color.
+	$wp_customize->add_setting( 'header_line_color', array(
+		'default'           => $d_line_color,
+		'sanitize_callback' => 'sanitize_hex_color',
+		'transport'         => 'refresh',
+	) );
+
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'header_line_color', array(
+		'label'       => __( 'Couleur de soulignement de l\'entête', 'vingt-dixsept' ),
+		'section'     => 'theme_email',
+	) ) );
 }
- add_action( 'customize_register', 'vingt_dixsept_customize_register'  );
+add_action( 'customize_register', 'vingt_dixsept_customize_register'  );
 
 /**
  * Is there a custom logo for the site ?
@@ -87,4 +120,4 @@ function vingt_dixsept_customize_control_js() {
 		'emailUrl' => esc_url_raw( get_permalink( get_option( 'vingt_dixsept_email_id' ) ) ),
 	) );
 }
- add_action( 'customize_controls_enqueue_scripts', 'vingt_dixsept_customize_control_js' );
+add_action( 'customize_controls_enqueue_scripts', 'vingt_dixsept_customize_control_js' );

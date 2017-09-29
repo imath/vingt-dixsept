@@ -175,11 +175,11 @@ function vingt_dixsept_email_logo() {
  */
 function vingt_dixsept_email_sitename() {
 	$name = get_bloginfo( 'name' );
-	
+
 	if ( ! $name ) {
 		return;
 	}
-	
+
 	echo esc_html( $name );
 }
 
@@ -233,7 +233,7 @@ function vingt_dixsept_email_colors( $part = '' ) {
 
 	if ( ! isset( $vds->email_colors ) ) {
 		$colorscheme = get_theme_mod( 'colorscheme', 'default' );
-		
+
 		$vds->email_colors = $sc[ $colorscheme ];
 	}
 
@@ -261,11 +261,23 @@ function vingt_dixsept_email_title_text_color() {
 }
 
 function vingt_dixsept_email_title_bg_color() {
-	echo vingt_dixsept_email_colors( 'title_bg' );
+	$header_bg_color = get_theme_mod( 'header_background_color' );
+
+	if ( ! $header_bg_color || in_array( $header_bg_color, array( '#222', '#FFF' ), true ) ) {
+		$header_bg_color = vingt_dixsept_email_colors( 'title_bg' );
+	}
+
+	echo $header_bg_color;
 }
 
 function vingt_dixsept_email_separator_color() {
-	echo vingt_dixsept_email_colors( 'separator' );
+	$separator_color = get_theme_mod( 'header_line_color' );
+
+	if ( ! $separator_color || in_array( $separator_color, array( '#222', '#333' ), true ) ) {
+		$separator_color = vingt_dixsept_email_colors( 'separator' );
+	}
+
+	echo $separator_color;
 }
 
 function vingt_dixsept_email_body_text_color() {
