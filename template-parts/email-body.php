@@ -58,9 +58,25 @@
 					</tr>
 					<tr>
 						<td class="container-padding footer-text" align="left" style="font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;font-size:12px;line-height:16px;color:#aaaaaa;padding-left:24px;padding-right:24px">
-							<br><br>
-							<a href="<?php echo esc_url( home_url( '/' ) ); ?>" style="color:#aaaaaa"><?php echo esc_html( home_url() ); ?></a><br>
-							<br><br>
+							<table cellpadding="0" cellspacing="0" border="0">
+								<tr>
+									<td align="left" width="300" style="vertical-align:middle;width:300px;max-width:300px;padding-top:24px;padding-bottom:24px;">
+										<a href="<?php echo esc_url( home_url( '/' ) ); ?>" style="color:#aaaaaa"><?php echo esc_html( home_url() ); ?></a>
+									</td>
+									<?php if ( has_nav_menu( 'social' ) && ! get_theme_mod( 'disable_social_menu' ) ) : vingt_dixsept_email_add_filter(); ?>
+										<td align="right" width="300" style="vertical-align:middle;width:300px;max-width:300px;padding-top:24px;padding-bottom:24px;">
+											<?php
+												wp_nav_menu( array(
+													'theme_location' => 'social',
+													'menu_class'     => 'social-links-menu',
+													'depth'          => 1,
+													'link_before'    => '<span class="email-hide">',
+													'link_after'     => '</span>' . vingt_dixsept_get_png( 'chain' ),
+												) );
+											?>
+										</td>
+									<?php vingt_dixsept_email_remove_filter(); endif ; ?>
+								</tr>
 						</td>
 					</tr>
 				</table>

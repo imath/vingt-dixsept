@@ -392,6 +392,76 @@ function vingt_dixsept_email_body_bg_color() {
 }
 
 /**
+ * Gets the output for the PNG icon file.
+ *
+ * @since  1.0.0
+ *
+ * @param  string $icon The icon ID.
+ * @return string       The output for the PNG icon file.
+ */
+function vingt_dixsept_get_png( $icon = '' ) {
+	if ( ! $icon ) {
+		return;
+	}
+
+	$src = get_theme_file_uri( "/assets/images/icon-{$icon}.png" );
+	$alt = ucfirst( $icon );
+
+	if ( 'Chain' === $alt ) {
+		$alt = esc_attr__( 'Lien utile', 'vingt-dixsept' );
+	}
+
+	return sprintf( '<img src="%1$s" alt="%2$s" class="social-link" height="16">', $src, $alt );
+}
+
+/**
+ * Displays PNG icons in social links menu.
+ *
+ * @since  1.0.0
+ *
+ * @param  string  $item_output The menu item output.
+ * @param  WP_Post $item        Menu item object.
+ * @param  int     $depth       Depth of the menu.
+ * @param  array   $args        wp_nav_menu() arguments.
+ * @return string               The menu item output with social icon.
+ */
+function vingt_dixsept_email_nav_menu_social_icons( $item_output, $item, $depth, $args ) {
+	// Get supported social icons.
+	$social_icons = twentyseventeen_social_links_icons();
+
+	// Change PNG icon inside social links menu if there is supported URL.
+	if ( 'social' === $args->theme_location ) {
+		foreach ( $social_icons as $attr => $value ) {
+			if ( false !== strpos( $item_output, $attr ) ) {
+				$item_output = str_replace( $args->link_after, '</span>' . vingt_dixsept_get_png( $value ), $item_output );
+			}
+		}
+	}
+
+	return $item_output;
+}
+
+/**
+ * Adds the social icons filter.
+ *
+ * @since 1.0.0
+ */
+function vingt_dixsept_email_add_filter() {
+	remove_filter( 'walker_nav_menu_start_el', 'twentyseventeen_nav_menu_social_icons', 10, 4 );
+	add_filter( 'walker_nav_menu_start_el', 'vingt_dixsept_email_nav_menu_social_icons', 10, 4 );
+}
+
+/**
+ * Removes the social icons filter.
+ *
+ * @since 1.0.0
+ */
+function vingt_dixsept_email_remove_filter() {
+	add_filter( 'walker_nav_menu_start_el', 'twentyseventeen_nav_menu_social_icons', 10, 4 );
+	remove_filter( 'walker_nav_menu_start_el', 'vingt_dixsept_email_nav_menu_social_icons', 10, 4 );
+}
+
+/**
  * Prints the content of the CSS file used to style the emails.
  *
  * @since 1.0.0
@@ -405,7 +475,7 @@ function vingt_dixsept_email_print_css() {
 	 * @param string Absolute file to the css file.
 	 */
 	$css = apply_filters( 'vingt_dixsept_email_email_get_css', sprintf( '/%1$semail%2$s.css',
-		get_theme_file_path( '/assets' ),
+		get_theme_file_path( 'assets/css/' ),
 		vingt_dixsept_js_css_suffix()
 	) );
 
@@ -435,6 +505,7 @@ function vingt_dixsept_email_print_css() {
 			table { margin: 0; }
 			a { text-decoration: underline !important; }
 			.container-padding.header a.custom-logo-link { padding: 0; }
+			.footer-text img.social-link { height: 16px; }
 		';
 	}
 }

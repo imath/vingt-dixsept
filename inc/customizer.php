@@ -59,6 +59,24 @@ function vingt_dixsept_customize_register( $wp_customize ) {
 		),
 	) );
 
+	// Allow the admin to disable the email social links
+	$wp_customize->add_setting( 'disable_social_menu', array(
+		'default'           => 0,
+		'sanitize_callback' => 'absint',
+		'transport'         => 'refresh',
+	) );
+
+	$wp_customize->add_control( 'disable_social_menu', array(
+		'label'           => __( 'Intégrer les liens sociaux dans l\'email', 'vingt-dixsept' ),
+		'section'         => 'theme_email',
+		'type'            => 'radio',
+		'choices'         => array(
+			0 => __( 'Oui', 'vingt-dixsept' ),
+			1 => __( 'Non', 'vingt-dixsept' ),
+		),
+		'active_callback' => 'vingt_dixsept_has_social_menu',
+	) );
+
 	// Default values for the following settings.
 	$colorsheme = $wp_customize->get_setting( 'colorscheme' )->value();
 	$d_bg_color   = '#FFF';
@@ -104,6 +122,17 @@ add_action( 'customize_register', 'vingt_dixsept_customize_register'  );
  */
 function vingt_dixsept_has_custom_logo() {
 	return (bool) has_custom_logo();
+}
+
+/**
+ * Is there a social menu for the site ?
+ *
+ * @since 1.0.0.
+ *
+ * @return bool True if a social menu is activated. False otherwise.
+ */
+function vingt_dixsept_has_social_menu() {
+	return (bool) has_nav_menu( 'social' );
 }
 
 /**

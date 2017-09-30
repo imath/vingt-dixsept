@@ -48,8 +48,33 @@ a:active {
 	border: none;
 }
 
+.footer-text a,
+.footer-text a:hover,
+.footer-text a:visited,
+.footer-text a:active {
+	color: #aaaaaa;
+	text-decoration: underline;
+	border: none;
+}
+
+ul.social-links-menu {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+ul.social-links-menu li {
+	float: right;
+	padding: 0;
+	margin-right: 10px;
+}
+
 .container-padding.header {
 	padding-top: 10px;
+}
+
+.email-hide {
+	display: none;
 }
 
 @media screen and (max-width: 599px) {
