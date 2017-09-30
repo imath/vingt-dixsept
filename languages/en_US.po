@@ -1,0 +1,95 @@
+# Copyright (C) 2017 imath
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Vingt DixSept 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/imath/vingt-dixsept/issues\n"
+"POT-Creation-Date: 2017-09-30 11:54:07+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2017-09-30 14:23+0100\n"
+"Last-Translator: imath <mathchristo@yahoo.fr>\n"
+"Language-Team: FRENCH <contact@imathi.eu>\n"
+"X-Generator: Poedit 1.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: en_US\n"
+
+#: inc/customizer.php:23 inc/functions.php:537
+msgid "Modèle d'email"
+msgstr "Email template"
+
+#: inc/customizer.php:35
+msgid "Intégrer le logo du site dans l'email"
+msgstr "Use the site logo into the email header"
+
+#: inc/customizer.php:39 inc/customizer.php:57 inc/customizer.php:74
+msgid "Oui"
+msgstr "Yes"
+
+#: inc/customizer.php:40 inc/customizer.php:58 inc/customizer.php:75
+msgid "Non"
+msgstr "No"
+
+#: inc/customizer.php:53
+msgid "Intégrer le nom du site dans l'email"
+msgstr "Use the site name into the email header"
+
+#: inc/customizer.php:70
+msgid "Intégrer les liens sociaux dans l'email"
+msgstr "Use social links into the email footer"
+
+#: inc/customizer.php:98
+msgid "Couleur d'arrière plan de l'entête"
+msgstr "Header background color"
+
+#: inc/customizer.php:110
+msgid "Couleur de soulignement de l'entête"
+msgstr "Header underline color"
+
+#: inc/functions.php:411
+msgid "Lien utile"
+msgstr "Useful link"
+
+#: inc/functions.php:540
+msgid ""
+"Vous pouvez personnaliser le gabarit qui sera utilisé pour les emails "
+"envoyés par WordPress."
+msgstr ""
+"You can customize the template that will be used when WordPress sends "
+"emails."
+
+#: inc/functions.php:541
+msgid "Pour cela utilisez la barre latérale pour spécifier vos préférences."
+msgstr "Use the left sidebar to define your preferences."
+
+#: inc/functions.php:542
+msgid ""
+"Voici comment seront affichés les <a href=\"#\">liens</a> contenus dans "
+"certains emails."
+msgstr ""
+"Here is how <a href=\"#\">links</a> will be displayed in your emails."
+
+#. Theme Name of the plugin/theme
+msgid "Vingt DixSept"
+msgstr "Vingt DixSept"
+
+#. Theme URI of the plugin/theme
+msgid "https://github.com/imath/vingt-dixsept"
+msgstr "https://github.com/imath/vingt-dixsept"
+
+#. Description of the plugin/theme
+msgid ""
+"Un \"gamin\" de TwentySeventeen qui se concentre sur la mise en valeur des "
+"emails de votre site."
+msgstr ""
+"A TwentySeventeen's \"kid\" which focuses on making your WordPress emails "
+"prettier."
+
+#. Author of the plugin/theme
+msgid "imath"
+msgstr "imath"
+
+#. Author URI of the plugin/theme
+msgid "https://imathi.eu"
+msgstr "https://imathi.eu"

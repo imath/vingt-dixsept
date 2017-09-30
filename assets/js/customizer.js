@@ -7,6 +7,8 @@
  * @see  https://make.xwp.co/2016/07/21/navigating-to-a-url-in-the-customizer-preview-when-a-section-is-expanded/
  */
 
+/* global vingtDixsept */
+
 ( function( $, api ) {
 	var previousUrl, clearPreviousUrl, previewUrlValue;
 

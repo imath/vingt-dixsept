@@ -1,0 +1,88 @@
+# Copyright (C) 2017 imath
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Vingt DixSept 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/imath/vingt-dixsept/issues\n"
+"POT-Creation-Date: 2017-09-30 12:31:52+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2017-MO-DA HO:MI+ZONE\n"
+"Last-Translator: imath <contact@imathi.eu>\n"
+"Language-Team: FRENCH <contact@imathi.eu>\n"
+"X-Generator: grunt-wp-i18n 0.5.4\n"
+
+#: inc/customizer.php:23 inc/functions.php:537
+msgid "Modèle d'email"
+msgstr ""
+
+#: inc/customizer.php:35
+msgid "Intégrer le logo du site dans l'email"
+msgstr ""
+
+#: inc/customizer.php:39 inc/customizer.php:57 inc/customizer.php:74
+msgid "Oui"
+msgstr ""
+
+#: inc/customizer.php:40 inc/customizer.php:58 inc/customizer.php:75
+msgid "Non"
+msgstr ""
+
+#: inc/customizer.php:53
+msgid "Intégrer le nom du site dans l'email"
+msgstr ""
+
+#: inc/customizer.php:70
+msgid "Intégrer les liens sociaux dans l'email"
+msgstr ""
+
+#: inc/customizer.php:98
+msgid "Couleur d'arrière plan de l'entête"
+msgstr ""
+
+#: inc/customizer.php:110
+msgid "Couleur de soulignement de l'entête"
+msgstr ""
+
+#: inc/functions.php:411
+msgid "Lien utile"
+msgstr ""
+
+#: inc/functions.php:540
+msgid ""
+"Vous pouvez personnaliser le gabarit qui sera utilisé pour les emails "
+"envoyés par WordPress."
+msgstr ""
+
+#: inc/functions.php:541
+msgid "Pour cela utilisez la barre latérale pour spécifier vos préférences."
+msgstr ""
+
+#: inc/functions.php:542
+msgid ""
+"Voici comment seront affichés les <a href=\"#\">liens</a> contenus dans "
+"certains emails."
+msgstr ""
+
+#. Theme Name of the plugin/theme
+msgid "Vingt DixSept"
+msgstr ""
+
+#. Theme URI of the plugin/theme
+msgid "https://github.com/imath/vingt-dixsept"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Un \"gamin\" de TwentySeventeen qui se concentre sur la mise en valeur des "
+"emails de votre site."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "imath"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://imathi.eu"
+msgstr ""

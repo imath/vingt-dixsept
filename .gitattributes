@@ -6,3 +6,4 @@
 /.jshintrc export-ignore
 /.jshintignore export-ignore
 /LICENSE export-ignore
+/assets/images/icons.svg export-ignore

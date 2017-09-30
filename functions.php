@@ -67,6 +67,9 @@ final class VingtDixSept {
 
 		// Customizer additions.
 		require_once get_theme_file_path( '/inc/customizer.php' );
+
+		// Translations
+		load_theme_textdomain( 'vingt-dixsept', get_theme_file_path( '/languages' ) );
 	}
 }
 /**

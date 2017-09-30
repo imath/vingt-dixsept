@@ -11,7 +11,7 @@ module.exports = function( grunt ) {
 			grunt: {
 				src: ['Gruntfile.js']
 			},
-			all: ['Gruntfile.js', 'js/*.js']
+			all: ['Gruntfile.js', 'assets/js/*.js']
 		},
 		checktextdomain: {
 			options: {
@@ -40,7 +40,7 @@ module.exports = function( grunt ) {
 			}
 		},
 		clean: {
-			all: ['assets/*.min.css', 'assets/*.min.js']
+			all: ['assets/css/*.min.css', 'assets/js/*.min.js']
 		},
 		makepot: {
 			target: {
@@ -64,7 +64,7 @@ module.exports = function( grunt ) {
 				extDot: 'last',
 				expand: true,
 				ext: '.min.js',
-				src: ['assets/*.js', '!*.min.js']
+				src: ['assets/js/*.js', '!*.min.js']
 			},
 			options: {
 				banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
@@ -77,19 +77,19 @@ module.exports = function( grunt ) {
 				extDot: 'last',
 				expand: true,
 				ext: '.min.css',
-				src: ['assets/*.css', '!*.min.css']
+				src: ['assets/css/*.css', '!*.min.css']
 			}
 		},
 		imagemin: {
 			core: {
 				expand: true,
-				cwd: ['assets/images/'],
+				cwd: 'assets/images/',
 				src: ['**/*.{gif,jpg,jpeg,png}'],
-				dest: ['assets/images/']
+				dest: 'assets/images/'
 			}
 		},
 		jsvalidate:{
-			src: ['assets/*.js'],
+			src: ['assets/js/*.js'],
 			options:{
 				globals: {},
 				esprimaOptions:{},
