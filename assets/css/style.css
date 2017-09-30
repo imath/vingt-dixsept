@@ -28,6 +28,10 @@ body.has-header-image.home.blog.wp-custom-logo .custom-logo-link {
 	bottom: 15%;
 }
 
+.custom-logo-link img {
+	max-width: 250px;
+}
+
 @media screen and (min-width: 48em) {
 	.has-header-image.twentyseventeen-front-page.wp-custom-logo .site-branding,
 	.has-header-video.twentyseventeen-front-page.wp-custom-logo .site-branding,
