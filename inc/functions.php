@@ -195,6 +195,17 @@ function vingt_dixsept_email_logo_size( $image = array() ) {
 }
 
 /**
+ * Checks if the email logo should be used.
+ *
+ * @since  1.0.0
+ *
+ * @return boolean True if the email logo should be used. False otherwise.
+ */
+function vingt_dixsept_use_email_logo() {
+	return (bool) has_custom_logo() && ! get_theme_mod( 'disable_email_logo' );
+}
+
+/**
  * Displays the site logo into the email.
  *
  * @since  1.0.0

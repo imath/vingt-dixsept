@@ -23,12 +23,12 @@
 						<td class="container-padding header" align="left" style="font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;padding-bottom:12px;padding-top:12px;padding-left:24px;padding-right:24px;background-color:<?php vingt_dixsept_email_title_bg_color(); ?>">
 							<table cellpadding="0" cellspacing="0" border="0">
 								<tr>
-									<?php if ( ! get_theme_mod( 'disable_email_logo' ) && ! get_theme_mod( 'disable_email_sitename' ) ) : ?>
+									<?php if ( vingt_dixsept_use_email_logo() && ! get_theme_mod( 'disable_email_sitename' ) ) : ?>
 
 										<td width="60px" height="60px"><?php vingt_dixsept_email_logo() ;?></td>
 										<td height="60px" style="font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;font-size:48px;font-weight:bold;vertical-align:middle;padding-left:16px;color:<?php vingt_dixsept_email_title_text_color() ;?>"><?php bloginfo( 'name' ); ?></td>
 
-									<?php elseif ( get_theme_mod( 'disable_email_sitename' ) && ! get_theme_mod( 'disable_email_logo' ) ) : ?>
+									<?php elseif ( get_theme_mod( 'disable_email_sitename' ) && vingt_dixsept_use_email_logo() ) : ?>
 
 										<td width="60px" align="center" width="600" style="vertical-align:middle;width:600px;max-width:600px;"><?php vingt_dixsept_email_logo() ;?></td>
 
