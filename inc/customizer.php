@@ -110,6 +110,23 @@ function vingt_dixsept_customize_register( $wp_customize ) {
 		'label'       => __( 'Couleur de soulignement de l\'entête', 'vingt-dixsept' ),
 		'section'     => 'theme_email',
 	) ) );
+
+	// Maintenance page
+	$wp_customize->add_setting( 'maintenance_mode', array(
+		'default'           => 0,
+		'sanitize_callback' => 'absint',
+		'transport'         => 'postMessage',
+	) );
+
+	$wp_customize->add_control( 'maintenance_mode', array(
+		'label'       => __( 'Maintenance', 'vingt-dixsept' ),
+		'section'     => 'theme_options',
+		'type'        => 'radio',
+		'choices'     => array(
+			0 => __( 'Pas de maintenance.', 'vingt-dixsept' ),
+			1 => __( 'Maintenance en cours.', 'vingt-dixsept' ),
+		),
+	) );
 }
 add_action( 'customize_register', 'vingt_dixsept_customize_register'  );
 

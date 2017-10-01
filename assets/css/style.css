@@ -51,6 +51,36 @@ body.has-header-image.home.blog.wp-custom-logo .custom-logo-link {
 	display: block;
 }
 
+.maintenance-template-default .navigation-top {
+ 	bottom: 0;
+}
+
+.maintenance-template-default .navigation-top h1 {
+	margin: 0;
+	padding: 0;
+	padding-top: 5px;
+	width: 60%;
+	float: left;
+}
+
+.maintenance-template-default #site-navigation .login-link {
+ 	color: #767676;
+ 	top: 0.7em;
+ 	display: block;
+    padding: 1em;
+    position: absolute;
+    right: 0;
+ }
+
+.maintenance-template-default #site-navigation .login-link .icon {
+	height: 18px;
+	width: 18px;
+}
+
+.js .maintenance-template-default .menu-toggle {
+	display: none;
+}
+
 @supports ( object-fit: cover ) {
 	.has-header-image:not(.twentyseventeen-front-page):not(.home) .custom-header-media img {
 		height: auto;

@@ -599,6 +599,127 @@ function vingt_dixsept_the_thumbnail_embed() {
 }
 
 /**
+ * Makes sure the Posts query only contains the Maintenance page.
+ *
+ * @since 1.0.0
+ *
+ * @param  null   $return   A null value to use the regular WP Query.
+ * @param  WP_Query $wq     The WP Query object.
+ * @return null|array       Null if not on front end.
+ *                          An array containing a Maintenance Post otherwise.
+ */
+function vingt_dixsept_maintenance_posts_pre_query( $return = null, WP_Query $wq ) {
+	if ( ! $wq->is_main_query() || true === $wq->get( 'suppress_filters' ) || is_admin() ) {
+		return $return;
+	}
+
+	// Set the queried object to avoid notices
+	$wq->queried_object = get_post( (object) array(
+		'ID'             => 0,
+		'comment_status' => 'closed',
+		'comment_count'  => 0,
+		'post_type'      => 'maintenance',
+		'post_title'     => __( 'Site en cours de maintenance', 'vingt-dixsept' ),
+	) );
+
+	$wq->queried_object_id = $wq->queried_object->ID;
+
+	// Set the Posts list to be limited to our custom post.
+	$posts = array( $wq->queried_object );
+
+	// Reset some WP Query properties
+	$wq->found_posts   = 1;
+	$wq->max_num_pages = 1;
+	$wq->posts         = $posts;
+	$wq->post          = $wq->queried_object;
+	$wq->post_count    = 1;
+
+	foreach ( array(
+		'is_home'       => true,
+		'is_page'       => true,
+		'is_single'     => false,
+		'is_archive'    => false,
+		'is_tax'        => false,
+	) as $key => $conditional_tag ) {
+		$wq->{$key} = (bool) $conditional_tag;
+	}
+
+	return $wq->posts;
+}
+
+/**
+ * Gets the maintenance template file path.
+ *
+ * @since  1.0.0
+ *
+ * @return string The maintenance template file path.
+ */
+function vingt_dixsept_get_maintenance_template() {
+	return get_theme_file_path( 'page-maintenance.php' );
+}
+
+/**
+ * Inits the Maintenance mode if required.
+ *
+ * @since  1.0.0
+ */
+function vingt_dixsept_maintenance_init() {
+	if ( is_admin() || current_user_can( 'manage_options' ) ) {
+		return;
+	}
+
+	if ( ! get_theme_mod( 'maintenance_mode' ) ) {
+		return;
+	}
+
+	// Neutralize signups.
+	add_filter( 'option_users_can_register', '__return_zero' );
+
+	// Use the maintenance template
+	add_filter( 'template_include', 'vingt_dixsept_get_maintenance_template', 12 );
+
+	// Make sure nobody is filtering this anymore.
+	remove_all_filters( 'posts_pre_query' );
+
+	// Set the maintenance post.
+	add_filter( 'posts_pre_query', 'vingt_dixsept_maintenance_posts_pre_query', 10, 2 );
+}
+add_action( 'after_setup_theme', 'vingt_dixsept_maintenance_init', 20 );
+
+/**
+ * Outputs the Maintenance page title.
+ *
+ * @since 1.0.0
+ */
+function vingt_dixsept_the_maintenance_title() {
+	$page = get_queried_object();
+
+	echo apply_filters( 'the_title', $page->post_title, $page->ID );
+}
+
+/**
+ * Checks if the Maintenance page has a content to display.
+ *
+ * @since 1.0.0
+ */
+function vingt_dixsept_has_maintenance_content() {
+	$page = get_queried_object();
+
+	return ! empty( $page->post_content );
+}
+
+/**
+ * Outputs the Maintenance page content.
+ *
+ * @since 1.0.0
+ */
+function vingt_dixsept_the_maintenance_content() {
+	$page = get_queried_object();
+
+	echo apply_filters( 'the_content', $page->post_content );
+}
+
+/**
  * Upgrade the theme db version
  *
  * @since  1.0.0
