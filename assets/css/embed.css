@@ -1,0 +1,38 @@
+/* Embed Style sheet */
+
+body .wp-embed {
+	font-family: "Libre Franklin", "Helvetica Neue", helvetica, arial, sans-serif;
+	font-size: 16px;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.66;
+}
+
+body.colors-dark .wp-embed {
+	color: #eee;
+	background: #222;
+}
+
+p.wp-embed-heading {
+	clear: both;
+	line-height: 1.4;
+	margin: 0 0 0.75em;
+	padding: 0;
+	font-size: 24px;
+	font-size: 1.5rem;
+	font-weight: 300;
+}
+
+.wp-embed-heading a {
+	color: #333;
+	text-decoration: none;
+}
+
+body.colors-dark .wp-embed-heading a {
+	color: #fff;
+}
+
+.wp-embed-excerpt p {
+	margin: 0 0 1.5em;
+	padding: 0;
+}

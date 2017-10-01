@@ -54,6 +54,56 @@ function vingt_dixsept_enqueue_styles() {
 add_action( 'wp_enqueue_scripts', 'vingt_dixsept_enqueue_styles' );
 
 /**
+ * Enqueues the Theme's embed CSS.
+ *
+ * @since 1.0.0
+ */
+function vingt_dixsept_enqueue_embed_styles() {
+	$min  = vingt_dixsept_js_css_suffix();
+	$vs   = vingt_dixsept();
+
+	wp_register_style( 'vingt-dixsept-fonts', twentyseventeen_fonts_url(), array(), null );
+
+	// Enqueue the theme's Embed stylesheet.
+	wp_enqueue_style(
+		'embed-style',
+		get_stylesheet_directory_uri() . "/assets/css/embed{$min}.css",
+		array( 'vingt-dixsept-fonts' ),
+		$vs->version
+	);
+
+	if ( 'custom' === get_theme_mod( 'colorscheme' ) ) {
+		$hue = absint( get_theme_mod( 'colorscheme_hue', 250 ) );
+
+		/**
+		 * Filter Twenty Seventeen default saturation level.
+		 *
+		 * @since Twenty Seventeen 1.0
+		 *
+		 * @param int $saturation Color saturation level.
+		 */
+		$saturation = absint( apply_filters( 'twentyseventeen_custom_colors_saturation', 50 ) );
+		$reduced_saturation = ( .8 * $saturation ) . '%';
+		$saturation = $saturation . '%';
+
+		// Title & Body custom colors
+		$title_color =  $hue . ', ' . $saturation . ', 0%';
+		$body_color  = $hue . ', ' . $reduced_saturation . ', 20%';
+
+		wp_add_inline_style( 'embed-style', sprintf( '
+			body.colors-custom .wp-embed {
+				color: hsl( %1$s );
+			}
+
+			body.colors-custom .wp-embed-heading a {
+				color: hsl( %2$s );
+			}
+		', $body_color, $title_color ) );
+	}
+}
+add_action( 'enqueue_embed_scripts', 'vingt_dixsept_enqueue_embed_styles' );
+
+/**
  * Use this Child Theme's default header instead of the TwentySeventeen's one.
  *
  * @since 1.0.0
@@ -519,6 +569,33 @@ function vingt_dixsept_email_print_css() {
 			.footer-text img.social-link { height: 16px; }
 		';
 	}
+}
+
+/**
+ * Outputs the embed thumbnail.
+ *
+ * @since  1.0.0
+ */
+function vingt_dixsept_the_thumbnail_embed() {
+	$thumbnail = get_header_image_tag();
+
+	if ( has_post_thumbnail() ) {
+		$thumbnail = get_the_post_thumbnail( get_the_ID(), 'post-thumbnail' );
+
+	} elseif ( 'attachment' === get_post_type() && wp_attachment_is_image() ) {
+		// Let's avoid the image to be displayed twice.
+		remove_filter( 'the_excerpt_embed', 'wp_embed_excerpt_attachment' );
+
+		$thumbnail = wp_get_attachment_image( get_the_ID(), 'full' );
+	}
+
+	if ( ! $thumbnail ) {
+		return;
+	}
+
+	printf( '<div class="wp-embed-featured-image rectangular">
+		<a href="%1$s" target="_top">%2$s</a>
+	</div>', esc_url( apply_filters( 'the_permalink', get_permalink() ) ), $thumbnail );
 }
 
 /**
