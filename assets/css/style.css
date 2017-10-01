@@ -52,7 +52,7 @@ body.has-header-image.home.blog.wp-custom-logo .custom-logo-link {
 }
 
 .maintenance-template-default .navigation-top {
- 	bottom: 0;
+	bottom: 0;
 }
 
 .maintenance-template-default .navigation-top h1 {
@@ -64,13 +64,13 @@ body.has-header-image.home.blog.wp-custom-logo .custom-logo-link {
 }
 
 .maintenance-template-default #site-navigation .login-link {
- 	color: #767676;
- 	top: 0.7em;
- 	display: block;
-    padding: 1em;
-    position: absolute;
-    right: 0;
- }
+	color: #767676;
+	top: 0.7em;
+	display: block;
+	padding: 1em;
+	position: absolute;
+	right: 0;
+}
 
 .maintenance-template-default #site-navigation .login-link .icon {
 	height: 18px;
