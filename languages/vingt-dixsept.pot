@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Vingt DixSept 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/imath/vingt-dixsept/issues\n"
-"POT-Creation-Date: 2017-09-30 13:12:24+00:00\n"
+"POT-Creation-Date: 2017-10-01 21:43:27+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,7 +13,15 @@ msgstr ""
 "Language-Team: FRENCH <contact@imathi.eu>\n"
 "X-Generator: grunt-wp-i18n 0.5.4\n"
 
-#: inc/customizer.php:23 inc/functions.php:537
+#: header-maintenance.php:30
+msgid "Menu supérieur"
+msgstr ""
+
+#: header-maintenance.php:36
+msgid "Se connecter"
+msgstr ""
+
+#: inc/customizer.php:23 inc/functions.php:746
 msgid "Modèle d'email"
 msgstr ""
 
@@ -45,21 +53,37 @@ msgstr ""
 msgid "Couleur de soulignement de l'entête"
 msgstr ""
 
-#: inc/functions.php:411
+#: inc/customizer.php:122
+msgid "Maintenance"
+msgstr ""
+
+#: inc/customizer.php:126
+msgid "Pas de maintenance."
+msgstr ""
+
+#: inc/customizer.php:127
+msgid "Maintenance en cours."
+msgstr ""
+
+#: inc/functions.php:472
 msgid "Lien utile"
 msgstr ""
 
-#: inc/functions.php:540
+#: inc/functions.php:622
+msgid "Site en cours de maintenance"
+msgstr ""
+
+#: inc/functions.php:749
 msgid ""
 "Vous pouvez personnaliser le gabarit qui sera utilisé pour les emails "
 "envoyés par WordPress."
 msgstr ""
 
-#: inc/functions.php:541
+#: inc/functions.php:750
 msgid "Pour cela utilisez la barre latérale pour spécifier vos préférences."
 msgstr ""
 
-#: inc/functions.php:542
+#: inc/functions.php:751
 msgid ""
 "Voici comment seront affichés les <a href=\"#\">liens</a> contenus dans "
 "certains emails."

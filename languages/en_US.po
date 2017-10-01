@@ -4,18 +4,26 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Vingt DixSept 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/imath/vingt-dixsept/issues\n"
-"POT-Creation-Date: 2017-09-30 11:54:07+00:00\n"
+"POT-Creation-Date: 2017-10-01 21:43:27+00:00\n"
+"PO-Revision-Date: 2017-10-01 23:49+0100\n"
+"Last-Translator: imath <mathchristo@yahoo.fr>\n"
+"Language-Team: FRENCH <contact@imathi.eu>\n"
+"Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2017-09-30 14:23+0100\n"
-"Last-Translator: imath <mathchristo@yahoo.fr>\n"
-"Language-Team: FRENCH <contact@imathi.eu>\n"
 "X-Generator: Poedit 1.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: en_US\n"
 
-#: inc/customizer.php:23 inc/functions.php:537
+#: header-maintenance.php:30
+msgid "Menu supérieur"
+msgstr "Top Menu"
+
+#: header-maintenance.php:36
+msgid "Se connecter"
+msgstr "Log in"
+
+#: inc/customizer.php:23 inc/functions.php:746
 msgid "Modèle d'email"
 msgstr "Email template"
 
@@ -47,28 +55,42 @@ msgstr "Header background color"
 msgid "Couleur de soulignement de l'entête"
 msgstr "Header underline color"
 
-#: inc/functions.php:411
+#: inc/customizer.php:122
+msgid "Maintenance"
+msgstr "Maintenance"
+
+#: inc/customizer.php:126
+msgid "Pas de maintenance."
+msgstr "Maintenance off."
+
+#: inc/customizer.php:127
+msgid "Maintenance en cours."
+msgstr "Maintenance on."
+
+#: inc/functions.php:472
 msgid "Lien utile"
 msgstr "Useful link"
 
-#: inc/functions.php:540
+#: inc/functions.php:622
+msgid "Site en cours de maintenance"
+msgstr "Site under maintenance"
+
+#: inc/functions.php:749
 msgid ""
 "Vous pouvez personnaliser le gabarit qui sera utilisé pour les emails "
 "envoyés par WordPress."
 msgstr ""
-"You can customize the template that will be used when WordPress sends "
-"emails."
+"You can customize the template that will be used when WordPress sends emails."
 
-#: inc/functions.php:541
+#: inc/functions.php:750
 msgid "Pour cela utilisez la barre latérale pour spécifier vos préférences."
 msgstr "Use the left sidebar to define your preferences."
 
-#: inc/functions.php:542
+#: inc/functions.php:751
 msgid ""
 "Voici comment seront affichés les <a href=\"#\">liens</a> contenus dans "
 "certains emails."
-msgstr ""
-"Here is how <a href=\"#\">links</a> will be displayed in your emails."
+msgstr "Here is how <a href=\"#\">links</a> will be displayed in your emails."
 
 #. Theme Name of the plugin/theme
 msgid "Vingt DixSept"
