@@ -599,6 +599,38 @@ function vingt_dixsept_the_thumbnail_embed() {
 }
 
 /**
+ * Adds a container to inform about the maintenance mode inside the customizer only.
+ *
+ * @since 1.0.0
+ */
+function vingt_dixsept_display_maintenance_mode() {
+	if ( ! is_customize_preview() ) {
+		return;
+	}
+
+	?>
+	<div id="maintenance-mode"><?php vingt_dixsept_display_maintenance_mode_info(); ?></div>
+	<?php
+}
+
+/**
+ * Partial render callback for the maintenance mode.
+ *
+ * @since 1.0.0
+ */
+function vingt_dixsept_display_maintenance_mode_info() {
+	if ( ! get_theme_mod( 'maintenance_mode' ) ) {
+		$class = 'off';
+		$icon  = twentyseventeen_get_svg( array( 'icon' => 'play' ) );
+	} else {
+		$class = 'on';
+		$icon  = twentyseventeen_get_svg( array( 'icon' => 'pause' ) );
+	}
+
+	printf( '<div class="%1$s">%2$s</div>', $class, $icon );
+}
+
+/**
  * Makes sure the Posts query only contains the Maintenance page.
  *
  * @since 1.0.0

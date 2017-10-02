@@ -127,6 +127,12 @@ function vingt_dixsept_customize_register( $wp_customize ) {
 			1 => __( 'Maintenance en cours.', 'vingt-dixsept' ),
 		),
 	) );
+
+	$wp_customize->selective_refresh->add_partial( 'maintenance_mode', array(
+		'selector'         => '#maintenance-mode',
+		'render_callback'  => 'vingt_dixsept_display_maintenance_mode_info',
+		'fallback_refresh' => true,
+	) );
 }
 add_action( 'customize_register', 'vingt_dixsept_customize_register'  );
 
