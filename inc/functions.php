@@ -535,7 +535,7 @@ function vingt_dixsept_email_print_css() {
 	 *
 	 * @param string Absolute file to the css file.
 	 */
-	$css = apply_filters( 'vingt_dixsept_email_email_get_css', sprintf( '/%1$semail%2$s.css',
+	$css = apply_filters( 'vingt_dixsept_email_email_get_css', sprintf( '%1$semail%2$s.css',
 		get_theme_file_path( 'assets/css/' ),
 		vingt_dixsept_js_css_suffix()
 	) );
