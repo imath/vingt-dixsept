@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Vingt DixSept 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/imath/vingt-dixsept/issues\n"
-"POT-Creation-Date: 2017-10-01 21:43:27+00:00\n"
+"POT-Creation-Date: 2017-10-02 04:37:24+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "Se connecter"
 msgstr ""
 
-#: inc/customizer.php:23 inc/functions.php:746
+#: inc/customizer.php:23 inc/functions.php:778
 msgid "Modèle d'email"
 msgstr ""
 
@@ -69,21 +69,21 @@ msgstr ""
 msgid "Lien utile"
 msgstr ""
 
-#: inc/functions.php:622
+#: inc/functions.php:654
 msgid "Site en cours de maintenance"
 msgstr ""
 
-#: inc/functions.php:749
+#: inc/functions.php:781
 msgid ""
 "Vous pouvez personnaliser le gabarit qui sera utilisé pour les emails "
 "envoyés par WordPress."
 msgstr ""
 
-#: inc/functions.php:750
+#: inc/functions.php:782
 msgid "Pour cela utilisez la barre latérale pour spécifier vos préférences."
 msgstr ""
 
-#: inc/functions.php:751
+#: inc/functions.php:783
 msgid ""
 "Voici comment seront affichés les <a href=\"#\">liens</a> contenus dans "
 "certains emails."

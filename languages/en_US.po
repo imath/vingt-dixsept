@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Vingt DixSept 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/imath/vingt-dixsept/issues\n"
-"POT-Creation-Date: 2017-10-01 21:43:27+00:00\n"
-"PO-Revision-Date: 2017-10-01 23:49+0100\n"
+"POT-Creation-Date: 2017-10-02 04:37:24+00:00\n"
+"PO-Revision-Date: 2017-10-02 06:38+0100\n"
 "Last-Translator: imath <mathchristo@yahoo.fr>\n"
 "Language-Team: FRENCH <contact@imathi.eu>\n"
 "Language: en_US\n"
@@ -23,7 +23,7 @@ msgstr "Top Menu"
 msgid "Se connecter"
 msgstr "Log in"
 
-#: inc/customizer.php:23 inc/functions.php:746
+#: inc/customizer.php:23 inc/functions.php:778
 msgid "Modèle d'email"
 msgstr "Email template"
 
@@ -71,22 +71,22 @@ msgstr "Maintenance on."
 msgid "Lien utile"
 msgstr "Useful link"
 
-#: inc/functions.php:622
+#: inc/functions.php:654
 msgid "Site en cours de maintenance"
 msgstr "Site under maintenance"
 
-#: inc/functions.php:749
+#: inc/functions.php:781
 msgid ""
 "Vous pouvez personnaliser le gabarit qui sera utilisé pour les emails "
 "envoyés par WordPress."
 msgstr ""
 "You can customize the template that will be used when WordPress sends emails."
 
-#: inc/functions.php:750
+#: inc/functions.php:782
 msgid "Pour cela utilisez la barre latérale pour spécifier vos préférences."
 msgstr "Use the left sidebar to define your preferences."
 
-#: inc/functions.php:751
+#: inc/functions.php:783
 msgid ""
 "Voici comment seront affichés les <a href=\"#\">liens</a> contenus dans "
 "certains emails."
