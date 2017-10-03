@@ -1,0 +1,122 @@
+# Copyright (C) 2017 imath
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Vingt DixSept 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/imath/vingt-dixsept/issues\n"
+"POT-Creation-Date: 2017-10-02 04:37:24+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2017-10-03 17:54+0200\n"
+"Language-Team: FRENCH <contact@imathi.eu>\n"
+"X-Generator: Poedit 2.0.4\n"
+"Last-Translator: fxbenard pour WP-Translations.pro <fx@wp-translations."
+"pro>\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: fr\n"
+
+#: header-maintenance.php:30
+msgid "Menu supérieur"
+msgstr "Menu supérieur"
+
+#: header-maintenance.php:36
+msgid "Se connecter"
+msgstr "Se connecter"
+
+#: inc/customizer.php:23 inc/functions.php:778
+msgid "Modèle d'email"
+msgstr "Modèle d’e-mail"
+
+#: inc/customizer.php:35
+msgid "Intégrer le logo du site dans l'email"
+msgstr "Intégrer le logo du site dans l’e-mail"
+
+#: inc/customizer.php:39 inc/customizer.php:57 inc/customizer.php:74
+msgid "Oui"
+msgstr "Oui"
+
+#: inc/customizer.php:40 inc/customizer.php:58 inc/customizer.php:75
+msgid "Non"
+msgstr "Non"
+
+#: inc/customizer.php:53
+msgid "Intégrer le nom du site dans l'email"
+msgstr "Intégrer le nom du site dans l’e-mail"
+
+#: inc/customizer.php:70
+msgid "Intégrer les liens sociaux dans l'email"
+msgstr "Intégrer les liens sociaux dans l’e-mail"
+
+#: inc/customizer.php:98
+msgid "Couleur d'arrière plan de l'entête"
+msgstr "Couleur d’arrière plan de l’en-tête"
+
+#: inc/customizer.php:110
+msgid "Couleur de soulignement de l'entête"
+msgstr "Couleur de soulignement de l’en-tête"
+
+#: inc/customizer.php:122
+msgid "Maintenance"
+msgstr "Maintenance"
+
+#: inc/customizer.php:126
+msgid "Pas de maintenance."
+msgstr "Pas de maintenance."
+
+#: inc/customizer.php:127
+msgid "Maintenance en cours."
+msgstr "Maintenance en cours."
+
+#: inc/functions.php:472
+msgid "Lien utile"
+msgstr "Lien utile"
+
+#: inc/functions.php:654
+msgid "Site en cours de maintenance"
+msgstr "Site en cours de maintenance"
+
+#: inc/functions.php:781
+msgid ""
+"Vous pouvez personnaliser le gabarit qui sera utilisé pour les emails "
+"envoyés par WordPress."
+msgstr ""
+"Vous pouvez personnaliser le gabarit utilisé pour envoyer les e-mails de "
+"WordPress."
+
+#: inc/functions.php:782
+msgid "Pour cela utilisez la barre latérale pour spécifier vos préférences."
+msgstr ""
+"Pour cela utilisez la colonne latérale pour spécifier vos préférences."
+
+#: inc/functions.php:783
+msgid ""
+"Voici comment seront affichés les <a href=\"#\">liens</a> contenus dans "
+"certains emails."
+msgstr ""
+"Voici comment seront affichés les <a href=\"#\">liens</a> contenus dans "
+"certains e-mails."
+
+#. Theme Name of the plugin/theme
+msgid "Vingt DixSept"
+msgstr "Vingt DixSept"
+
+#. Theme URI of the plugin/theme
+msgid "https://github.com/imath/vingt-dixsept"
+msgstr "https://github.com/imath/vingt-dixsept"
+
+#. Description of the plugin/theme
+msgid ""
+"Un \"gamin\" de TwentySeventeen qui se concentre sur la mise en valeur des "
+"emails de votre site."
+msgstr ""
+"Un « gamin » de TwentySeventeen qui se concentre sur la mise en valeur des "
+"e-mails de votre site."
+
+#. Author of the plugin/theme
+msgid "imath"
+msgstr "imath"
+
+#. Author URI of the plugin/theme
+msgid "https://imathi.eu"
+msgstr "https://imathi.eu"
