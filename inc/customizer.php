@@ -32,7 +32,7 @@ function vingt_dixsept_customize_register( $wp_customize ) {
 	) );
 
 	$wp_customize->add_control( 'disable_email_logo', array(
-		'label'           => __( 'Intégrer le logo du site dans l\'email', 'vingt-dixsept' ),
+		'label'           => __( 'Intégrer le logo du site dans l’e-mail', 'vingt-dixsept' ),
 		'section'         => 'theme_email',
 		'type'            => 'radio',
 		'choices'         => array(
@@ -50,7 +50,7 @@ function vingt_dixsept_customize_register( $wp_customize ) {
 	) );
 
 	$wp_customize->add_control( 'disable_email_sitename', array(
-		'label'           => __( 'Intégrer le nom du site dans l\'email', 'vingt-dixsept' ),
+		'label'           => __( 'Intégrer le nom du site dans l’e-mail', 'vingt-dixsept' ),
 		'section'         => 'theme_email',
 		'type'            => 'radio',
 		'choices'         => array(
@@ -67,7 +67,7 @@ function vingt_dixsept_customize_register( $wp_customize ) {
 	) );
 
 	$wp_customize->add_control( 'disable_social_menu', array(
-		'label'           => __( 'Intégrer les liens sociaux dans l\'email', 'vingt-dixsept' ),
+		'label'           => __( 'Intégrer les liens sociaux dans l’e-mail', 'vingt-dixsept' ),
 		'section'         => 'theme_email',
 		'type'            => 'radio',
 		'choices'         => array(
@@ -95,7 +95,7 @@ function vingt_dixsept_customize_register( $wp_customize ) {
 	) );
 
 	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'header_background_color', array(
-		'label'       => __( 'Couleur d\'arrière plan de l\'entête', 'vingt-dixsept' ),
+		'label'       => __( 'Couleur d’arrière plan de l’en-tête', 'vingt-dixsept' ),
 		'section'     => 'theme_email',
 	) ) );
 
@@ -107,7 +107,7 @@ function vingt_dixsept_customize_register( $wp_customize ) {
 	) );
 
 	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'header_line_color', array(
-		'label'       => __( 'Couleur de soulignement de l\'entête', 'vingt-dixsept' ),
+		'label'       => __( 'Couleur de soulignement de l’en-tête', 'vingt-dixsept' ),
 		'section'     => 'theme_email',
 	) ) );
 
