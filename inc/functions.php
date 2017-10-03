@@ -775,12 +775,12 @@ function vingt_dixsept_upgrade() {
 			'comment_status' => 'closed',
 			'ping_status'    => 'closed',
 			'post_status'    => 'private',
-			'post_title'     => __( 'Modèle d\'email', 'vingt-dixsept' ),
+			'post_title'     => __( 'Modèle d’e-mail', 'vingt-dixsept' ),
 			'post_type'      => 'vingt_dixsept_email',
 			'post_content'   => sprintf( '<p>%1$s</p><p>%2$s</p><p>%3$s</p>',
-				__( 'Vous pouvez personnaliser le gabarit qui sera utilisé pour les emails envoyés par WordPress.', 'vingt-dixsept' ),
-				__( 'Pour cela utilisez la barre latérale pour spécifier vos préférences.', 'vingt-dixsept' ),
-				__( 'Voici comment seront affichés les <a href="#">liens</a> contenus dans certains emails.', 'vingt-dixsept' )
+				__( 'Vous pouvez personnaliser le gabarit utilisé pour envoyer les e-mails de WordPress.', 'vingt-dixsept' ),
+				__( 'Pour cela utilisez la colonne latérale pour spécifier vos préférences.', 'vingt-dixsept' ),
+				__( 'Voici comment seront affichés les <a href="#">liens</a> contenus dans certains e-mails.', 'vingt-dixsept' )
 			),
 		) );
 
