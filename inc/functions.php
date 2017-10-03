@@ -362,7 +362,7 @@ function vingt_dixsept_email_colors( $part = '' ) {
 	$sc  = vingt_dixsept_email_get_scheme_colors();
 
 	if ( ! isset( $vds->email_colors ) ) {
-		$colorscheme = get_theme_mod( 'colorscheme', 'default' );
+		$colorscheme = get_theme_mod( 'colorscheme', 'light' );
 
 		$vds->email_colors = $sc[ $colorscheme ];
 	}
