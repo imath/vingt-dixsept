@@ -2,9 +2,9 @@
 # This file is distributed under the GNU General Public License v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Vingt DixSept 1.0.0\n"
+"Project-Id-Version: Vingt DixSept 1.0.1\n"
 "Report-Msgid-Bugs-To: https://github.com/imath/vingt-dixsept/issues\n"
-"POT-Creation-Date: 2017-10-02 04:37:24+00:00\n"
+"POT-Creation-Date: 2017-10-03 18:50:00+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -21,12 +21,12 @@ msgstr ""
 msgid "Se connecter"
 msgstr ""
 
-#: inc/customizer.php:23 inc/functions.php:778
+#: inc/customizer.php:23
 msgid "Modèle d'email"
 msgstr ""
 
 #: inc/customizer.php:35
-msgid "Intégrer le logo du site dans l'email"
+msgid "Intégrer le logo du site dans l’e-mail"
 msgstr ""
 
 #: inc/customizer.php:39 inc/customizer.php:57 inc/customizer.php:74
@@ -38,19 +38,19 @@ msgid "Non"
 msgstr ""
 
 #: inc/customizer.php:53
-msgid "Intégrer le nom du site dans l'email"
+msgid "Intégrer le nom du site dans l’e-mail"
 msgstr ""
 
 #: inc/customizer.php:70
-msgid "Intégrer les liens sociaux dans l'email"
+msgid "Intégrer les liens sociaux dans l’e-mail"
 msgstr ""
 
 #: inc/customizer.php:98
-msgid "Couleur d'arrière plan de l'entête"
+msgid "Couleur d’arrière plan de l’en-tête"
 msgstr ""
 
 #: inc/customizer.php:110
-msgid "Couleur de soulignement de l'entête"
+msgid "Couleur de soulignement de l’en-tête"
 msgstr ""
 
 #: inc/customizer.php:122
@@ -73,20 +73,24 @@ msgstr ""
 msgid "Site en cours de maintenance"
 msgstr ""
 
+#: inc/functions.php:778
+msgid "Modèle d’e-mail"
+msgstr ""
+
 #: inc/functions.php:781
 msgid ""
-"Vous pouvez personnaliser le gabarit qui sera utilisé pour les emails "
-"envoyés par WordPress."
+"Vous pouvez personnaliser le gabarit utilisé pour envoyer les e-mails de "
+"WordPress."
 msgstr ""
 
 #: inc/functions.php:782
-msgid "Pour cela utilisez la barre latérale pour spécifier vos préférences."
+msgid "Pour cela utilisez la colonne latérale pour spécifier vos préférences."
 msgstr ""
 
 #: inc/functions.php:783
 msgid ""
 "Voici comment seront affichés les <a href=\"#\">liens</a> contenus dans "
-"certains emails."
+"certains e-mails."
 msgstr ""
 
 #. Theme Name of the plugin/theme
@@ -99,8 +103,8 @@ msgstr ""
 
 #. Description of the plugin/theme
 msgid ""
-"Un \"gamin\" de TwentySeventeen qui se concentre sur la mise en valeur des "
-"emails de votre site."
+"Un « gamin » de TwentySeventeen qui se concentre sur la mise en valeur des "
+"e-mails de votre site."
 msgstr ""
 
 #. Author of the plugin/theme
