@@ -14,6 +14,7 @@
  * Add custom settings for the Theme Customizer.
  *
  * @since  1.0.0
+ * @since  1.1.0 Adds a section for the Login screen.
  *
  * @param WP_Customize_Manager $wp_customize Theme Customizer object.
  */
@@ -156,7 +157,7 @@ function vingt_dixsept_customize_register( $wp_customize ) {
 			1 => __( 'Oui', 'vingt-dixsept' ),
 
 		),
-		'active_callback' => 'vingt_dixsept_has_custom_logo',
+		'active_callback' => 'vingt_dixsept_has_site_icon',
 	) );
 }
 add_action( 'customize_register', 'vingt_dixsept_customize_register'  );
@@ -181,6 +182,17 @@ function vingt_dixsept_has_custom_logo() {
  */
 function vingt_dixsept_has_social_menu() {
 	return (bool) has_nav_menu( 'social' );
+}
+
+/**
+ * Is there site icon for the site ?
+ *
+ * @since 1.1.0.
+ *
+ * @return bool True if a site icon is activated. False otherwise.
+ */
+function vingt_dixsept_has_site_icon() {
+	return (bool) get_site_icon_url( 84 );
 }
 
 /**

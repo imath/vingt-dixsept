@@ -122,10 +122,11 @@ add_filter( 'twentyseventeen_custom_header_args', 'vingt_dixsept_custom_header_a
  * Registers a private Post Type to use for the email sample.
  *
  * @since 1.0.0
+ * @since 1.1.0 Use a more generic post type for the customizer templates.
  */
 function vingt_dixsept_register_email_type() {
-	$common_attributes = array(
-		'label'              => 'vingt_dixsept_email',
+	register_post_type( 'vingt_dixsept_tpl', array(
+		'label'              => 'vingt_dixsept_template',
 		'public'             => true,
 		'publicly_queryable' => true,
 		'show_ui'            => false,
@@ -135,13 +136,7 @@ function vingt_dixsept_register_email_type() {
 		'rewrite'            => false,
 		'has_archive'        => false,
 		'hierarchical'       => true,
-	);
-
-	// @todo replace this with a unique 'template' post type.
-	register_post_type( 'vingt_dixsept_email', $common_attributes );
-
-	$common_attributes['label'] = 'vingt_dixsept_login';
-	register_post_type( 'vingt_dixsept_login', $common_attributes );
+	) );
 }
 add_action( 'init', 'vingt_dixsept_register_email_type' );
 
@@ -245,6 +240,28 @@ function vingt_dixsept_email_logo_size( $image = array() ) {
 	}
 
 	return $image;
+}
+
+/**
+ * Outputs a specific customizer template.
+ *
+ * @since  1.1.0
+ *
+ * @param  string $part The part for the template to use.
+ * @return string      The output for the template part.
+ */
+function vingt_dixsept_get_template_part( $part = '' ) {
+	if ( ! is_singular( 'vingt_dixsept_tpl' ) || ! $part ) {
+		return '';
+	}
+
+	$template = get_queried_object();
+
+	if ( empty( $template->post_mime_type ) ) {
+		return '';
+	}
+
+	return get_template_part( sprintf( 'template-parts/%s', $template->post_mime_type ), $part );
 }
 
 /**
@@ -755,9 +772,220 @@ function vingt_dixsept_the_maintenance_content() {
 }
 
 /**
+ * Gets the login's preview screen action.
+ *
+ * @since  1.1.0
+ *
+ * @return string The form action type.
+ */
+function vingt_dixsept_login_get_action() {
+	$action = 'login';
+
+	if ( isset( $_REQUEST['action'] ) ) {
+		$action = $_REQUEST['action'];
+	}
+
+	return apply_filters( 'vingt_dixsept_login_get_action', $action );
+}
+
+/**
+ * Outputs the login's preview screen document title.
+ *
+ * @since 1.1.0
+ */
+function vingt_dixsept_login_document_title() {
+	$separator = '&lsaquo;';
+
+	if ( is_rtl() ) {
+		$separator = '&rsaquo;';
+	}
+
+	return printf( '%1$s %2$s %3$s',
+		get_bloginfo( 'name', 'display' ),
+		$separator,
+		esc_html__( 'Se connecter', 'vingt-dixsept' )
+	);
+}
+
+/**
+ * Outputs the login's preview screen submit button value.
+ *
+ * @since 1.1.0
+ */
+function vingt_dixsept_login_submit_title() {
+	esc_attr_e( 'Se connecter', 'vingt-dixsept' );
+}
+
+/**
+ * Outputs the login's preview screen body classes.
+ *
+ * @since  1.1.0
+ */
+function vingt_dixsept_login_classes() {
+	$action  = vingt_dixsept_login_get_action();
+	$classes = array(
+		'login-action-' . $action,
+		'wp-core-ui',
+		'rtl',
+		'locale-' . sanitize_html_class( strtolower( str_replace( '_', '-', get_locale() ) ) ),
+	);
+
+	if ( ! is_rtl() ) {
+		unset( $classes[2] );
+	}
+
+	/**
+	 * Filters the login page body classes.
+	 *
+	 * @since WordPress 3.5.0
+	 *
+	 * @param array  $classes An array of body classes.
+	 * @param string $action  The action that brought the visitor to the login page.
+	 */
+	$classes = apply_filters( 'login_body_class', $classes, $action );
+
+	echo 'login ' . join( ' ', $classes );
+}
+
+/**
+ * Outputs the login's preview screen header url.
+ *
+ * @since  1.1.0
+ */
+function vingt_dixsept_login_url() {
+	printf( '%s', esc_url(
+		/**
+		 * Filters link URL of the header logo above login form.
+		 *
+		 * @since WordPress 2.1.0
+		 *
+		 * @param string $login_header_url Login header logo URL.
+		 */
+		apply_filters( 'login_headerurl', __( 'https://wordpress.org/', 'vingt-dixsept' ) )
+	) );
+}
+
+/**
+ * Outputs the login's preview screen header title.
+ *
+ * @since  1.1.0
+ */
+function vingt_dixsept_login_title() {
+	printf( '%s', esc_attr(
+		/**
+		 * Filters the title attribute of the header logo above login form.
+		 *
+		 * @since WordPress 2.1.0
+		 *
+		 * @param string $login_header_title Login header logo title attribute.
+		 */
+		apply_filters( 'login_headertitle', __( 'Powered by WordPress', 'vingt-dixsept' ) )
+	) );
+}
+
+/**
+ * Checks if the login logo should be used.
+ *
+ * @since  1.1.0
+ *
+ * @return boolean True if the login logo should be used. False otherwise.
+ */
+function vingt_dixsept_use_login_logo() {
+	return has_site_icon() && (bool) get_theme_mod( 'enable_login_logo' );
+}
+
+/**
+ * Customize the login screen look and feel.
+ *
+ * @since 1.1.0
+ *
+ * @return string CSS Outut.
+ */
+function vingt_dixsept_login_style() {
+	$logo_rule = '';
+
+	if ( vingt_dixsept_use_login_logo() ) {
+		$logo_rule = sprintf( '
+			#login h1 a {
+				background-image: none, url(%s);
+			}
+		', esc_url_raw( get_site_icon_url( 84 ) ) );
+	}
+
+	$important = '';
+
+	if ( is_customize_preview() ) {
+		$important = ' !important';
+	}
+
+	$color_rule  = '';
+	$colors      = vingt_dixsept_email_get_scheme_colors();
+	$colorscheme = get_theme_mod( 'colorscheme', 'light' );
+
+	// Load the selected colorscheme.
+	if ( isset( $colors[ $colorscheme ] ) ) {
+		$color = $colors[ $colorscheme ];
+
+		$color_rule = sprintf( '
+			#login p.submit .button-primary.button-large,
+			#login p.submit .button-primary[disabled],
+			#login p.submit .button-primary:disabled {
+				color: %1$s%3$s;
+				background-color: %2$s%3$s;
+				border-color: %2$s%3$s;
+				-webkit-box-shadow: none%3$s;
+				box-shadow: none%3$s;
+				text-shadow: none%3$s;
+			}
+
+			#login p.submit .button-primary.button-large:hover,
+			#login p.submit .button-primary:disabled:hover {
+				color: %2$s%3$s;
+				background-color: %1$s%3$s;
+				border-color: %2$s%3$s;
+			}
+
+			a:focus {
+				color: %1$s%3$s;
+				-webkit-box-shadow: none%3$s;
+				box-shadow: none%3$s;
+			}
+
+			#login input[type="text"]:focus,
+			#login input[type="password"]:focus {
+				border-color: %2$s%3$s;
+				-webkit-box-shadow: none%3$s;
+				box-shadow: none%3$s;
+			}
+		', $color['title_bg'], $color['body_link'], $important );
+	}
+
+	wp_add_inline_style( 'login', sprintf( '
+		%1$s
+
+		%2$s
+	', $logo_rule, $color_rule ) );
+}
+add_action( 'login_enqueue_scripts', 'vingt_dixsept_login_style', 9 );
+
+/**
+ * Make sure there's a version of the site icon for the login logo
+ *
+ * @since 1.1.0
+ *
+ * @param  array $icon_sizes The list of allowed icon sizes in Pixels.
+ * @return array             The list of allowed icon sizes in Pixels.
+ */
+function vingt_dixsept_logo_size( $icon_sizes = array() ) {
+	return array_merge( $icon_sizes, array( 84 ) );
+}
+add_filter( 'site_icon_image_sizes', 'vingt_dixsept_logo_size', 10, 1 );
+
+/**
  * Upgrade the theme db version
  *
  * @since  1.0.0
+ * @since  1.1.0 Edits the post type used to store custom templates.
  */
 function vingt_dixsept_upgrade() {
 	if ( is_customize_preview() ) {
@@ -776,16 +1004,18 @@ function vingt_dixsept_upgrade() {
 		'ping_status'    => 'closed',
 		'post_status'    => 'private',
 		'post_content'   => '',
+		'post_type'      => 'vingt_dixsept_tpl',
 	);
+
+	$email_post_id = (int) get_option( 'vingt_dixsept_email_id', 0 );
 
 	// Install 1.0.0 if needed
 	if ( (float) $db_version < 1.0 ) {
-		$email_post_id = (int) get_option( 'vingt_dixsept_email_id', 0 );
-
+		// Create the email private post.
 		if ( ! $email_post_id ) {
 			$email_post_id = wp_insert_post( wp_parse_args( array(
+				'post_mime_type' => 'email',
 				'post_title'     => __( 'Modèle d’e-mail', 'vingt-dixsept' ),
-				'post_type'      => 'vingt_dixsept_email',
 				'post_content'   => sprintf( '<p>%1$s</p><p>%2$s</p><p>%3$s</p>',
 					__( 'Vous pouvez personnaliser le gabarit utilisé pour envoyer les e-mails de WordPress.', 'vingt-dixsept' ),
 					__( 'Pour cela utilisez la colonne latérale pour spécifier vos préférences.', 'vingt-dixsept' ),
@@ -799,12 +1029,23 @@ function vingt_dixsept_upgrade() {
 
 	// Upgrade to 1.1.0 if needed
 	if ( (float) $db_version < 1.1 ) {
+		$email_post = get_post( $email_post_id );
+
+		// Set the Email Post type to the global template one.
+		if ( ! empty( $email_post->ID ) && 'vingt_dixsept_tpl' !== get_post_type( $email_post ) ) {
+			$email_post->post_type      = 'vingt_dixsept_tpl';
+			$email_post->post_mime_type = 'email';
+
+			wp_update_post( $email_post );
+		}
+
 		$login_post_id = (int) get_option( 'vingt_dixsept_login_id', 0 );
 
+		// Create the login private post.
 		if ( ! $login_post_id ) {
 			$login_post_id = wp_insert_post( wp_parse_args( array(
+				'post_mime_type' => 'login',
 				'post_title'     => __( 'Formulaire de connexion', 'vingt-dixsept' ),
-				'post_type'      => 'vingt_dixsept_login',
 				'post_content'   => sprintf( '<p>%1s</p>',
 					__( 'Cet article est utilisé pour personnaliser l’apparence du formulaire de connexion.', 'vingt-dixsept' )
 				),
