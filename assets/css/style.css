@@ -41,6 +41,14 @@ body.has-header-image.home.blog.wp-custom-logo .custom-logo-link {
 	}
 }
 
+/* Makes sure the fixed main navigation menu won't hide part of the text */
+:target:before {
+	content: "";
+	display: block;
+	height: 120px;      /* fixed main navigation menu height */
+	margin: -120px 0 0; /* negative fixed main navigation menu height */
+}
+
 /* Hides English text by default */
 .en-text {
 	display: none;
