@@ -20,7 +20,7 @@
 function vingt_dixsept_customize_register( $wp_customize ) {
 	// Theme email section.
 	$wp_customize->add_section( 'theme_email', array(
-		'title'    => __( 'Modèle d\'email', 'vingt-dixsept' ),
+		'title'    => __( 'Modèle d’email', 'vingt-dixsept' ),
 		'priority' => 125, // Before Theme options.
 	) );
 
@@ -133,6 +133,31 @@ function vingt_dixsept_customize_register( $wp_customize ) {
 		'render_callback'  => 'vingt_dixsept_display_maintenance_mode_info',
 		'fallback_refresh' => true,
 	) );
+
+	// Theme login section.
+	$wp_customize->add_section( 'theme_login', array(
+		'title'    => __( 'Formulaire de connexion', 'vingt-dixsept' ),
+		'priority' => 135, // After Theme options.
+	) );
+
+	// Allow the admin to enable the login logo
+	$wp_customize->add_setting( 'enable_login_logo', array(
+		'default'           => 0,
+		'sanitize_callback' => 'absint',
+		'transport'         => 'refresh',
+	) );
+
+	$wp_customize->add_control( 'enable_login_logo', array(
+		'label'           => __( 'Remplacer le logo de WordPress par celui du site', 'vingt-dixsept' ),
+		'section'         => 'theme_login',
+		'type'            => 'radio',
+		'choices'         => array(
+			0 => __( 'Non', 'vingt-dixsept' ),
+			1 => __( 'Oui', 'vingt-dixsept' ),
+
+		),
+		'active_callback' => 'vingt_dixsept_has_custom_logo',
+	) );
 }
 add_action( 'customize_register', 'vingt_dixsept_customize_register'  );
 
@@ -169,7 +194,8 @@ function vingt_dixsept_customize_control_js() {
 
 	wp_enqueue_script ( 'vingt_dixsept-customizer-control', get_stylesheet_directory_uri() . "/assets/js/customizer{$min}.js", array(), $vs->version, true );
 	wp_localize_script( 'vingt_dixsept-customizer-control', 'vingtDixsept', array(
-		'emailUrl' => esc_url_raw( get_permalink( get_option( 'vingt_dixsept_email_id' ) ) ),
+		'emailUrl'  => esc_url_raw( get_permalink( get_option( 'vingt_dixsept_email_id' ) ) ),
+		'loginlUrl' => esc_url_raw( get_permalink( get_option( 'vingt_dixsept_login_id' ) ) ),
 	) );
 }
 add_action( 'customize_controls_enqueue_scripts', 'vingt_dixsept_customize_control_js' );

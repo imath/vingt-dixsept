@@ -16,25 +16,38 @@
 		previousUrl = null;
 	};
 
+	setPreviewUrl = function( url, isExpanded ) {
+		if ( ! url ) {
+			return null;
+		}
+
+		if ( isExpanded ) {
+			previousUrl = previewUrlValue.get();
+			previewUrlValue.set( url );
+			previewUrlValue.bind( clearPreviousUrl );
+
+		} else {
+			previewUrlValue.unbind( clearPreviousUrl );
+
+			if ( previousUrl ) {
+				previewUrlValue.set( previousUrl );
+			}
+		}
+	}
+
 	api.section( 'theme_email', function( section ) {
 		previewUrlValue = api.previewer.previewUrl;
 
 		section.expanded.bind( function( isExpanded ) {
-			var url;
+			setPreviewUrl( vingtDixsept.emailUrl, isExpanded );
+		} );
+	} );
 
-			if ( isExpanded ) {
-				url = vingtDixsept.emailUrl;
-				previousUrl = previewUrlValue.get();
-				previewUrlValue.set( url );
-				previewUrlValue.bind( clearPreviousUrl );
+	api.section( 'theme_login', function( section ) {
+		previewUrlValue = api.previewer.previewUrl;
 
-			} else {
-				previewUrlValue.unbind( clearPreviousUrl );
-
-				if ( previousUrl ) {
-					previewUrlValue.set( previousUrl );
-				}
-			}
+		section.expanded.bind( function( isExpanded ) {
+			setPreviewUrl( vingtDixsept.loginlUrl, isExpanded );
 		} );
 	} );
 

@@ -124,21 +124,24 @@ add_filter( 'twentyseventeen_custom_header_args', 'vingt_dixsept_custom_header_a
  * @since 1.0.0
  */
 function vingt_dixsept_register_email_type() {
-	register_post_type(
-		'vingt_dixsept_email',
-		array(
-			'label'              => 'vingt_dixsept_email',
-			'public'             => true,
-			'publicly_queryable' => true,
-			'show_ui'            => false,
-			'show_in_menu'       => false,
-			'show_in_nav_menus'  => false,
-			'query_var'          => false,
-			'rewrite'            => false,
-			'has_archive'        => false,
-			'hierarchical'       => true,
-		)
+	$common_attributes = array(
+		'label'              => 'vingt_dixsept_email',
+		'public'             => true,
+		'publicly_queryable' => true,
+		'show_ui'            => false,
+		'show_in_menu'       => false,
+		'show_in_nav_menus'  => false,
+		'query_var'          => false,
+		'rewrite'            => false,
+		'has_archive'        => false,
+		'hierarchical'       => true,
 	);
+
+	// @todo replace this with a unique 'template' post type.
+	register_post_type( 'vingt_dixsept_email', $common_attributes );
+
+	$common_attributes['label'] = 'vingt_dixsept_login';
+	register_post_type( 'vingt_dixsept_login', $common_attributes );
 }
 add_action( 'init', 'vingt_dixsept_register_email_type' );
 
@@ -768,23 +771,47 @@ function vingt_dixsept_upgrade() {
 		return;
 	}
 
-	$email_post_id = (int) get_option( 'vingt_dixsept_email_id', 0 );
+	$common_attributes = array(
+		'comment_status' => 'closed',
+		'ping_status'    => 'closed',
+		'post_status'    => 'private',
+		'post_content'   => '',
+	);
 
-	if ( ! $email_post_id ) {
-		$email_post_id = wp_insert_post( array(
-			'comment_status' => 'closed',
-			'ping_status'    => 'closed',
-			'post_status'    => 'private',
-			'post_title'     => __( 'Modèle d’e-mail', 'vingt-dixsept' ),
-			'post_type'      => 'vingt_dixsept_email',
-			'post_content'   => sprintf( '<p>%1$s</p><p>%2$s</p><p>%3$s</p>',
-				__( 'Vous pouvez personnaliser le gabarit utilisé pour envoyer les e-mails de WordPress.', 'vingt-dixsept' ),
-				__( 'Pour cela utilisez la colonne latérale pour spécifier vos préférences.', 'vingt-dixsept' ),
-				__( 'Voici comment seront affichés les <a href="#">liens</a> contenus dans certains e-mails.', 'vingt-dixsept' )
-			),
-		) );
+	// Install 1.0.0 if needed
+	if ( (float) $db_version < 1.0 ) {
+		$email_post_id = (int) get_option( 'vingt_dixsept_email_id', 0 );
 
-		update_option( 'vingt_dixsept_email_id', $email_post_id );
+		if ( ! $email_post_id ) {
+			$email_post_id = wp_insert_post( wp_parse_args( array(
+				'post_title'     => __( 'Modèle d’e-mail', 'vingt-dixsept' ),
+				'post_type'      => 'vingt_dixsept_email',
+				'post_content'   => sprintf( '<p>%1$s</p><p>%2$s</p><p>%3$s</p>',
+					__( 'Vous pouvez personnaliser le gabarit utilisé pour envoyer les e-mails de WordPress.', 'vingt-dixsept' ),
+					__( 'Pour cela utilisez la colonne latérale pour spécifier vos préférences.', 'vingt-dixsept' ),
+					__( 'Voici comment seront affichés les <a href="#">liens</a> contenus dans certains e-mails.', 'vingt-dixsept' )
+				),
+			), $common_attributes ) );
+
+			update_option( 'vingt_dixsept_email_id', $email_post_id );
+		}
+	}
+
+	// Upgrade to 1.1.0 if needed
+	if ( (float) $db_version < 1.1 ) {
+		$login_post_id = (int) get_option( 'vingt_dixsept_login_id', 0 );
+
+		if ( ! $login_post_id ) {
+			$login_post_id = wp_insert_post( wp_parse_args( array(
+				'post_title'     => __( 'Formulaire de connexion', 'vingt-dixsept' ),
+				'post_type'      => 'vingt_dixsept_login',
+				'post_content'   => sprintf( '<p>%1s</p>',
+					__( 'Cet article est utilisé pour personnaliser l’apparence du formulaire de connexion.', 'vingt-dixsept' )
+				),
+			), $common_attributes ) );
+
+			update_option( 'vingt_dixsept_login_id', $login_post_id );
+		}
 	}
 
 	// Update version.
