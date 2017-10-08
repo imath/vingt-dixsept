@@ -49,3 +49,9 @@
 		<h1>
 			<a href="<?php vingt_dixsept_login_url(); ?>" title="<?php vingt_dixsept_login_title(); ?>" tabindex="-1"><?php bloginfo( 'name' ); ?></a>
 		</h1>
+
+		<?php if ( 'lostpassword' === vingt_dixsept_login_get_action() ) : ?>
+			<p class="message">
+				<?php esc_html_e( 'Veuillez saisir votre identifiant ou votre adresse de messagerie. Un lien permettant de créer un nouveau mot de passe vous sera envoyé par e-mail.', 'vingt-dixsept' ); ?>
+			</p>
+		<?php endif ; ?>

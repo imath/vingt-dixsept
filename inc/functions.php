@@ -555,7 +555,7 @@ function vingt_dixsept_email_print_css() {
 	 *
 	 * @param string Absolute file to the css file.
 	 */
-	$css = apply_filters( 'vingt_dixsept_email_email_get_css', sprintf( '%1$semail%2$s.css',
+	$css = apply_filters( 'vingt_dixsept_email_get_css', sprintf( '%1$semail%2$s.css',
 		get_theme_file_path( 'assets/css/' ),
 		vingt_dixsept_js_css_suffix()
 	) );
@@ -881,6 +881,58 @@ function vingt_dixsept_login_title() {
 		 */
 		apply_filters( 'login_headertitle', __( 'Powered by WordPress', 'vingt-dixsept' ) )
 	) );
+}
+
+/**
+ * Outputs the Login navigation.
+ *
+ * @since  1.1.0
+ */
+function vingt_dixsept_login_navigation() {
+	$navlinks = array();
+
+	$action       = vingt_dixsept_login_get_action();
+	$url          = get_permalink( get_option( 'vingt_dixsept_login_id' ) );
+	$registration = get_option( 'users_can_register' );
+	$register     = '';
+
+	// urls
+	$login        = sprintf( '<a href="%1$s">%2$s</a>',
+		esc_url( $url ),
+		esc_html__( 'Connexion', 'vingt-dixsept' )
+	);
+
+	$lostpass     = sprintf( '<a href="%1$s">%2$s</a>',
+		esc_url( add_query_arg( 'action', 'lostpassword', $url ) ),
+		esc_html__( 'Mot de passe oublié ?', 'vingt-dixsept' )
+	);
+
+	if ( $registration ) {
+		$register = sprintf( '<a href="%1$s">%2$s</a>',
+			esc_url( add_query_arg( 'action', 'register', $url ) ),
+			esc_html__( 'Inscription', 'vingt-dixsept' )
+		);
+	}
+
+	if ( 'login' === $action ) {
+		array_push( $navlinks, $lostpass );
+
+		if ( $register ) {
+			array_unshift( $navlinks, $register );
+		}
+	} elseif ( 'lostpassword' === $action ) {
+		array_push( $navlinks, $login );
+
+		if ( $register ) {
+			array_push( $navlinks, $register );
+		}
+	}
+
+	if ( ! $navlinks ) {
+		return;
+	}
+
+	echo join( ' | ', $navlinks );
 }
 
 /**
