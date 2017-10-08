@@ -716,7 +716,7 @@ function vingt_dixsept_get_maintenance_template() {
  * @since  1.0.0
  */
 function vingt_dixsept_maintenance_init() {
-	if ( is_admin() || current_user_can( 'manage_options' ) ) {
+	if ( is_admin() || current_user_can( 'maintenance_mode' ) ) {
 		return;
 	}
 
@@ -737,6 +737,33 @@ function vingt_dixsept_maintenance_init() {
 	add_filter( 'posts_pre_query', 'vingt_dixsept_maintenance_posts_pre_query', 10, 2 );
 }
 add_action( 'after_setup_theme', 'vingt_dixsept_maintenance_init', 20 );
+
+/**
+ * Maps The maintenance mode capability.
+ *
+ * Allow the admin to set the 'maintenance_mode' cap to some users or roles
+ * in case he wants to get feedbacks from them.
+ *
+ * @since 1.0.0
+ *
+ * @param  array   $caps    Capabilities for meta capability.
+ * @param  string  $cap     Capability name.
+ * @param  integer $user_id User id.
+ * @param  mixed   $args    Arguments.
+ * @return array            Actual capabilities for meta capability.
+ */
+function vingt_dixsept_map_meta_caps( $caps = array(), $cap = '', $user_id = 0, $args = array() ) {
+	if ( 'maintenance_mode' !== $cap ) {
+		return $caps;
+
+	// Fallback to Admin only if the current user does not have the maintenance mode cap.
+	} elseif ( empty( wp_get_current_user()->allcaps['maintenance_mode'] ) ) {
+		$caps = array( 'manage_options' );
+	}
+
+	return $caps;
+}
+add_filter( 'map_meta_cap', 'vingt_dixsept_map_meta_caps', 10, 4 );
 
 /**
  * Outputs the Maintenance page title.
