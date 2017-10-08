@@ -926,6 +926,8 @@ function vingt_dixsept_login_navigation() {
 		if ( $register ) {
 			array_push( $navlinks, $register );
 		}
+	} elseif ( 'register' === $action ) {
+		$navlinks = array( $login, $lostpass );
 	}
 
 	if ( ! $navlinks ) {
