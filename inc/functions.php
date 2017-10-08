@@ -975,10 +975,22 @@ function vingt_dixsept_login_style() {
 	$color_rule  = '';
 	$colors      = vingt_dixsept_email_get_scheme_colors();
 	$colorscheme = get_theme_mod( 'colorscheme', 'light' );
+	$formcolor   = '#FFF';
+	$labelcolor  = '#72777c';
+	$linkcolor   = '#555d66';
 
 	// Load the selected colorscheme.
 	if ( isset( $colors[ $colorscheme ] ) ) {
 		$color = $colors[ $colorscheme ];
+
+		$bgcolor  = $color['body_link'];
+		$txtcolor = $color['title_bg'];
+
+		if ( 'dark' === $colorscheme ) {
+			$txtcolor   = $color['body_bg'];
+			$formcolor  = $color['separator'];
+			$labelcolor = $linkcolor = '#FFF';
+		}
 
 		$color_rule = sprintf( '
 			#login p.submit .button-primary.button-large,
@@ -1011,14 +1023,49 @@ function vingt_dixsept_login_style() {
 				-webkit-box-shadow: none%3$s;
 				box-shadow: none%3$s;
 			}
-		', $color['title_bg'], $color['body_link'], $important );
+
+			#login form {
+				background-color: %4$s;
+			}
+
+			#login label {
+				color: %5$s;
+			}
+		', $txtcolor, $bgcolor, $important, $formcolor, $labelcolor );
+	}
+
+	$custom_header_rule = '';
+
+	if ( get_theme_mod( 'enable_login_custom_header' ) ) {
+		$custom_header = get_custom_header();
+
+		$custom_header_rule = sprintf( '
+			body.login {
+				background-image: url( %s );
+				background-size: cover;
+			}
+
+			body.login p#nav, body.login p#backtoblog {
+				background: %2$s;
+				-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.13);
+				box-shadow: 0 1px 3px rgba(0, 0, 0, 0.13);
+				padding: 8px 24px;
+				margin-top: 0;
+			}
+
+			body.login p#nav a, body.login p#backtoblog a {
+				color: %3$s;
+			}
+		', $custom_header->url, $formcolor, $linkcolor );
 	}
 
 	wp_add_inline_style( 'login', sprintf( '
 		%1$s
 
 		%2$s
-	', $logo_rule, $color_rule ) );
+
+		%3$s
+	', $logo_rule, $color_rule, $custom_header_rule ) );
 }
 add_action( 'login_enqueue_scripts', 'vingt_dixsept_login_style', 9 );
 

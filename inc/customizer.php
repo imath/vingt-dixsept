@@ -155,9 +155,25 @@ function vingt_dixsept_customize_register( $wp_customize ) {
 		'choices'         => array(
 			0 => __( 'Non', 'vingt-dixsept' ),
 			1 => __( 'Oui', 'vingt-dixsept' ),
-
 		),
 		'active_callback' => 'vingt_dixsept_has_site_icon',
+	) );
+
+	// Allow the admin to enable the login custom header
+	$wp_customize->add_setting( 'enable_login_custom_header', array(
+		'default'           => 0,
+		'sanitize_callback' => 'absint',
+		'transport'         => 'refresh',
+	) );
+
+	$wp_customize->add_control( 'enable_login_custom_header', array(
+		'label'           => __( 'Intégrer l’arrière plan du site.', 'vingt-dixsept' ),
+		'section'         => 'theme_login',
+		'type'            => 'radio',
+		'choices'         => array(
+			0 => __( 'Non', 'vingt-dixsept' ),
+			1 => __( 'Oui', 'vingt-dixsept' ),
+		)
 	) );
 }
 add_action( 'customize_register', 'vingt_dixsept_customize_register'  );
