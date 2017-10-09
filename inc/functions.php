@@ -711,6 +711,29 @@ function vingt_dixsept_get_maintenance_template() {
 }
 
 /**
+ * Checks if the theme is activated on the main site.
+ *
+ * @since 1.1.0
+ *
+ * @return boolean True if the theme is activated on the main site.
+ *                 False otherwise.
+ */
+function vingt_dixsept_is_main_site() {
+	return (int) get_current_network_id() === (int) get_current_blog_id();
+}
+
+/**
+ * Returns a 'none' string.
+ *
+ * @since 1.1.0
+ *
+ * @return string 'none'.
+ */
+function vingt_dixsept__return_none() {
+	return 'none';
+}
+
+/**
  * Inits the Maintenance mode if required.
  *
  * @since  1.0.0
@@ -726,6 +749,11 @@ function vingt_dixsept_maintenance_init() {
 
 	// Neutralize signups.
 	add_filter( 'option_users_can_register', '__return_zero' );
+
+	// Neutralize Multisite signups.
+	if ( is_multisite() && vingt_dixsept_is_main_site() ) {
+		add_filter( 'site_option_registration', 'vingt_dixsept__return_none' );
+	}
 
 	// Use the maintenance template
 	add_filter( 'template_include', 'vingt_dixsept_get_maintenance_template', 12 );
