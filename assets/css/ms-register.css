@@ -1,0 +1,185 @@
+/**
+ * Mulisite Register forms style
+ *
+ * NB: It uses placeholders dynamically replaced
+ * into the PHP function vingt_dixsept_login_style().
+ */
+body #signup-content h2:first-child {
+	border-left: 4px solid #00a0d2;
+	padding: 12px;
+	margin-left: 0;
+	margin-bottom: 20px;
+	background-color: #fff;
+	box-shadow: 0 1px 1px 0 rgba(0,0,0,0.1);
+	color: #444;
+	font-family: inherit;
+	font-size: 13px;
+	font-weight: normal;
+}
+
+#setupform input[type="text"],
+#setupform input[type="email"],
+#setupform select {
+	font-size: 24px;
+	width: %6$s;
+	padding: 3px;
+	margin: 2px 6px 16px 0;
+}
+
+#setupform input[type="email"]:focus {
+	border-color: %2$s%3$s;
+	-webkit-box-shadow: none%3$s;
+	box-shadow: none%3$s;
+}
+
+#setupform p.submit input[type="submit"].submit,
+#activateform p.submit input[type="submit"].submit,
+#setupform p.submit input[type="submit"].submit[disabled],
+#setupform p.submit input[type="submit"].submit:disabled {
+	color: %1$s%3$s;
+	background-color: %2$s%3$s;
+	border-color: %2$s%3$s;
+	-webkit-box-shadow: none%3$s;
+	box-shadow: none%3$s;
+	text-shadow: none%3$s;
+	height: 30px;
+	line-height: 28px;
+	padding: 0 12px 2px;
+	float: right;
+	display: inline-block;
+	text-decoration: none;
+	font-size: 13px;
+	margin: 0;
+	cursor: pointer;
+	border-width: 1px;
+	border-style: solid;
+	-webkit-appearance: none;
+	border-radius: 3px;
+	white-space: nowrap;
+	box-sizing: border-box;
+	vertical-align: baseline;
+}
+
+#setupform p.submit input[type="submit"].submit:hover,
+#activateform p.submit input[type="submit"].submit:hover,
+#setupform p.submit input[type="submit"].submit:disabled:hover {
+	color: %2$s%3$s;
+	background-color: %1$s%3$s;
+	border-color: %2$s%3$s;
+}
+
+#setupform p:not( .submit ) {
+	line-height: 1.5;
+	margin: 20px 0;
+}
+
+#setupform {
+	background-color: %4$s;
+}
+
+#setupform label {
+	color: %5$s;
+}
+
+#setupform label[for="user_email"] {
+	display: block;
+	margin-top: 20px;
+}
+
+#setupform p.error {
+	border-left: 4px solid #dc3232;
+	padding: 12px;
+	margin-left: 0;
+	margin-bottom: 20px;
+	background-color: #fff;
+	box-shadow: 0 1px 1px 0 rgba(0,0,0,0.1);
+}
+
+#setupform .prefix_address {
+	display: none;
+}
+
+#setupform .signup-toggle-info {
+	position: absolute;
+	padding: 5px;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	margin: 0;
+	-webkit-box-shadow: 1px 0 4px rgba( 0, 0, 0, 0.15 );
+	box-shadow: 1px 0 4px rgba( 0, 0, 0, 0.15 );
+	display: none;
+}
+
+#setupform .signup-toggle-info:before,
+#setupform .signup-toggle-info:after {
+	position: absolute;
+	left: 12px;
+	display: block;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-color: transparent;
+	content: "";
+}
+
+#setupform .signup-toggle-info:before {
+	top: -18px;
+	border-bottom-color: #ccc;
+	border-width: 9px;
+	right: 11px;
+}
+
+#setupform .signup-toggle-info:after {
+	top: -16px;
+	border-bottom-color: #fff;
+	border-width: 8px;
+}
+
+#setupform .signup-toggle-info.show {
+	display:block;
+}
+
+#setupform .signup-toggle-info .signup-site-url,
+#setupform p.signup-site-language {
+	margin: 10px 0;
+}
+
+#setupform p.privacy-intro {
+	margin-top: 10px;
+}
+
+.wp-activate-container #signup-welcome,
+.wp-activate-container p.view,
+.validate-blog-signup #signup-content .wp-signup-container > p:not( .error ),
+.validate-blog-signup #signup-content .wp-signup-container > h2:not(:first-child),
+.validate-blog-signup #signup-content .wp-signup-container > ul,
+.validate-user-signup #signup-content .wp-signup-container > p:not( .error ),
+.validate-user-signup #signup-content .wp-signup-container > h2:not(:first-child) {
+	margin-top: 20px;
+	margin-left: 0px;
+	padding: 26px 24px 46px;
+	font-weight: 400;
+	overflow: hidden;
+	background: rgb(255, 255, 255) none repeat scroll 0% 0%;
+	box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.13);
+}
+
+.validate-blog-signup #signup-content .wp-signup-container > ul {
+	margin-top: 0;
+	padding-left: 42px;
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+.wp-activate-container p.view {
+	margin-top: 0;
+	padding-top: 0;
+}
+
+.validate-blog-signup #signup-content .wp-signup-container > p:not(:first-child),
+.validate-blog-signup #signup-content .wp-signup-container > h2:not(:first-child),
+.validate-user-signup #signup-content .wp-signup-container > p:not(:first-child),
+.validate-user-signup #signup-content .wp-signup-container > h2:not(:first-child) {
+	margin-top: 0;
+	padding: 10px 24px;
+}

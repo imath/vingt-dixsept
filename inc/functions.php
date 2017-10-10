@@ -7,6 +7,9 @@
  * @since  1.0.0
  */
 
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Gets the min suffix for CSS & JS.
  *
@@ -723,6 +726,21 @@ function vingt_dixsept_is_main_site() {
 }
 
 /**
+ * Apply the signup/activate header hooks when requested.
+ *
+ * @since 1.1.0
+ *
+ * @param  string $hook The name of the hook to call.
+ */
+function vingt_dixsept_ms_register_header( $hook = 'do_signup_header' ) {
+	add_action( 'login_head', $hook );
+	add_action( 'login_head', 'wp_no_robots' );
+	?>
+	<meta name="viewport" content="width=device-width" />
+	<?php
+}
+
+/**
  * Returns a 'none' string.
  *
  * @since 1.1.0
@@ -838,6 +856,14 @@ function vingt_dixsept_login_get_action() {
 
 	if ( isset( $_REQUEST['action'] ) ) {
 		$action = $_REQUEST['action'];
+	} else {
+		$url_parts = explode( '/', wp_parse_url( $_SERVER['REQUEST_URI'] )['path'] );
+
+		if ( 'wp-signup.php' === end( $url_parts ) ) {
+			$action = 'register';
+		} elseif ( 'wp-activate.php' === end( $url_parts ) ) {
+			$action = 'activate';
+		}
 	}
 
 	return apply_filters( 'vingt_dixsept_login_get_action', $action );
@@ -854,6 +880,14 @@ function vingt_dixsept_login_document_title() {
 	if ( is_rtl() ) {
 		$separator = '&rsaquo;';
 	}
+
+	/**
+	 * @todo
+	 *
+	 * Now this is used fot Multisite registration and not
+	 * only the customizer, adapt the document title to the
+	 * current action.
+	 */
 
 	return printf( '%1$s %2$s %3$s',
 		get_bloginfo( 'name', 'display' ),
@@ -887,6 +921,10 @@ function vingt_dixsept_login_classes() {
 
 	if ( ! is_rtl() ) {
 		unset( $classes[2] );
+	}
+
+	if ( isset( $_POST['stage'] ) ) {
+		array_push( $classes, sanitize_html_class( $_POST['stage'] ) );
 	}
 
 	/**
@@ -947,9 +985,14 @@ function vingt_dixsept_login_navigation() {
 	$navlinks = array();
 
 	$action       = vingt_dixsept_login_get_action();
-	$url          = get_permalink( get_option( 'vingt_dixsept_login_id' ) );
 	$registration = get_option( 'users_can_register' );
 	$register     = '';
+
+	if ( is_customize_preview() ) {
+		$url = get_permalink( get_option( 'vingt_dixsept_login_id' ) );
+	} else {
+		$url = wp_login_url();
+	}
 
 	// urls
 	$login        = sprintf( '<a href="%1$s">%2$s</a>',
@@ -1114,15 +1157,45 @@ function vingt_dixsept_login_style() {
 		', $custom_header->url, $formcolor, $linkcolor );
 	}
 
+	$ms_rule = '';
+
+	if ( ( did_action( 'before_signup_header') || did_action( 'activate_header') ) && vingt_dixsept_is_main_site() ) {
+		$ms_css = file_get_contents( sprintf( '%1$sms-register%2$s.css',
+			get_theme_file_path( 'assets/css/' ),
+			vingt_dixsept_js_css_suffix()
+		) );
+
+		$ms_rule = sprintf( $ms_css, $txtcolor, $bgcolor, $important, $formcolor, $labelcolor, '100%' );
+	}
+
 	wp_add_inline_style( 'login', sprintf( '
 		%1$s
 
 		%2$s
 
 		%3$s
-	', $logo_rule, $color_rule, $custom_header_rule ) );
+
+		%4$s
+	', $logo_rule, $color_rule, $custom_header_rule, $ms_rule ) );
 }
 add_action( 'login_enqueue_scripts', 'vingt_dixsept_login_style', 9 );
+
+/**
+ * Enqueues a specific script to improve the Blog registration form.
+ *
+ * @since 1.1.0
+ */
+function vingt_dixsept_signup_blogform_enqueue_js() {
+	if ( ! vingt_dixsept_is_main_site() ) {
+		return;
+	}
+
+	$min = vingt_dixsept_js_css_suffix();
+  $vs  = vingt_dixsept();
+
+	wp_enqueue_script( 'vingt_dixsept-blog-form', get_stylesheet_directory_uri() . "/assets/js/blog-form{$min}.js", array(), $vs->version, true );
+}
+add_action( 'signup_blogform', 'vingt_dixsept_signup_blogform_enqueue_js' );
 
 /**
  * Make sure there's a version of the site icon for the login logo

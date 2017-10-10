@@ -4,7 +4,7 @@
  *
  * @package Vingt DixSept\template-parts
  *
- * @since 1.0.0
+ * @since 1.1.0
  */
 ?>
 <!DOCTYPE html>
@@ -54,7 +54,7 @@
 			<p class="message">
 				<?php esc_html_e( 'Veuillez saisir votre identifiant ou votre adresse de messagerie. Un lien permettant de créer un nouveau mot de passe vous sera envoyé par e-mail.', 'vingt-dixsept' ); ?>
 			</p>
-		<?php elseif ( 'register' === vingt_dixsept_login_get_action() ) : ?>
+		<?php elseif ( 'register' === vingt_dixsept_login_get_action() && ! is_multisite() ) : ?>
 			<p class="message">
 				<?php esc_html_e( 'S’inscrire sur ce site', 'vingt-dixsept' ); ?>
 			</p>

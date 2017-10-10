@@ -7,8 +7,8 @@
  * @since  1.0.0
  */
 
- // Exit if accessed directly.
- defined( 'ABSPATH' ) || exit;
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Add custom settings for the Theme Customizer.

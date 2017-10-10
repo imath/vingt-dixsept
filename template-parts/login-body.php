@@ -4,7 +4,7 @@
  *
  * @package Vingt DixSept\template-parts
  *
- * @since 1.0.0
+ * @since 1.1.0
  */
 ?>
 		<?php if ( 'login' === vingt_dixsept_login_get_action() ) : ?>
@@ -87,37 +87,6 @@
 					<input type="submit" name="wp-submit" id="wp-submit" disabled="disabled" class="button button-primary button-large" value="<?php esc_attr_e( 'Inscription', 'vingt-dixsept' ); ?>" />
 				</p>
 			</form>
-		<?php endif; ?>
+		<?php endif;
 
-		<p id="nav">
-			<?php vingt_dixsept_login_navigation(); ?>
-		</p>
-
-		<p id="backtoblog">
-			<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
-				<?php printf( _x( '&larr; Retour vers %s', 'site', 'vingt-dixsept' ),
-					get_bloginfo( 'title', 'display' )
-				); ?>
-			</a>
-		</p>
-
-	</div><!-- #login -->
-
-	<?php
-	/**
-	 * Fires in the login page footer.
-	 *
-	 * @since WordPress 3.1.0
-	 */
-	do_action( 'login_footer' );
-
-	if ( is_customize_preview() ) :
-		// Output the footer scripts for the customizer.
-		wp_footer();
-
-	endif; ?>
-
-	<div class="clear"></div>
-
-</body>
-</html>
+		get_template_part( 'template-parts/login', 'footer' );
