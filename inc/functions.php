@@ -881,18 +881,21 @@ function vingt_dixsept_login_document_title() {
 		$separator = '&rsaquo;';
 	}
 
-	/**
-	 * @todo
-	 *
-	 * Now this is used fot Multisite registration and not
-	 * only the customizer, adapt the document title to the
-	 * current action.
-	 */
+	$title  = __( 'Connexion', 'vingt-dixsept' );
+	$action = vingt_dixsept_login_get_action();
+
+	if ( 'lostpassword' === $action ) {
+		$title  = __( 'Mot de passe oublié', 'vingt-dixsept' );
+	} elseif ( 'register' === $action ) {
+		$title  = __( 'Inscription', 'vingt-dixsept' );
+	} elseif ( 'activate' === $action ) {
+		$title  = __( 'Activation', 'vingt-dixsept' );
+	}
 
 	return printf( '%1$s %2$s %3$s',
 		get_bloginfo( 'name', 'display' ),
 		$separator,
-		esc_html__( 'Se connecter', 'vingt-dixsept' )
+		esc_html( $title )
 	);
 }
 
