@@ -1,92 +1,30 @@
 <?php
 /**
- * Login body's template
+ * Login body's customizer template
  *
  * @package Vingt DixSept\template-parts
  *
  * @since 1.1.0
  */
-?>
-		<?php if ( 'login' === vingt_dixsept_login_get_action() ) : ?>
-			<form name="loginform" id="loginform">
-				<p>
-					<label for="user_login"><?php esc_html_e( 'Nom d’utilisateur ou adresse e-mail', 'vingt-dixsept' ); ?><br />
-						<input type="text" name="log" id="user_login" class="input" disabled="disabled" size="20"/>
-					</label>
-				</p>
-				<p>
-					<label for="user_pass"><?php esc_html_e( 'Mot de passe', 'vingt-dixsept' ); ?><br />
-						<input type="password" name="pwd" id="user_pass" class="input" disabled="disabled" size="20" />
-					</label>
-				</p>
+	 	switch ( vingt_dixsept_login_get_action() ) :
 
-				<?php
-				/**
-				 * Fires following the 'Password' field in the login form.
-				 *
-				 * @since WordPress 2.1.0
-				 */
-				do_action( 'login_form' ); ?>
+	 		case 'lostpassword' :
+	 			get_template_part( 'template-parts/login', 'lostpassword' );
+	 			break;
 
-				<p class="forgetmenot">
-					<label for="rememberme"><input name="rememberme" type="checkbox" id="rememberme" value="forever" disabled="disabled"/> <?php esc_html_e( 'Se souvenir de moi', 'vingt-dixsept' ); ?></label>
-				</p>
+	 		case 'register' :
+	 			if ( is_multisite() && vingt_dixsept_is_main_site() ) {
+	 				get_template_part( 'template-parts/login', 'msregister' );
+	 			} else {
+	 				get_template_part( 'template-parts/login', 'register' );
+	 			}
+	 			break;
 
-				<p class="submit">
-					<input type="submit" name="wp-submit" id="wp-submit" disabled="disabled" class="button button-primary button-large" value="<?php vingt_dixsept_login_submit_title(); ?>" />
-				</p>
-			</form>
-		<?php elseif ( 'lostpassword' === vingt_dixsept_login_get_action() ) : ?>
-			<form name="lostpasswordform" id="lostpasswordform">
-				<p>
-					<label for="user_login" >
-						<?php esc_html_e( 'Nom d’utilisateur ou adresse e-mail', 'vingt-dixsept' ); ?><br />
-						<input type="text" name="user_login" id="user_login" class="input" disabled="disabled" size="20" />
-					</label>
-				</p>
-				<?php
-				/**
-				 * Fires inside the lostpassword form tags, before the hidden fields.
-				 *
-				 * @since WordPress 2.1.0
-				 */
-				do_action( 'lostpassword_form' ); ?>
+	 		case 'login' :
+	 		default      :
+				get_template_part( 'template-parts/login', 'login' );
+				break;
 
-				<p class="submit">
-					<input type="submit" name="wp-submit" id="wp-submit" disabled="disabled" class="button button-primary button-large" value="<?php esc_attr_e( 'Générer un mot de passe', 'vingt-dixsept' ); ?>" />
-				</p>
-			</form>
-		<?php elseif ( 'register' === vingt_dixsept_login_get_action() ) : ?>
-			 <form name="registerform" id="registerform">
-				<p>
-					<label for="user_login"><?php esc_html_e( 'Identifiant', 'vingt-dixsept' ); ?><br />
-						<input type="text" name="user_login" id="user_login" class="input" disabled="disabled" size="20" />
-					</label>
-				</p>
-				<p>
-					<label for="user_email"><?php esc_html_e( 'Adresse de messagerie', 'vingt-dixsept' ); ?><br />
-						<input type="email" name="user_email" id="user_email" class="input" disabled="disabled" size="25" />
-					</label>
-				</p>
-
-				<?php
-				/**
-				 * Fires following the 'Email' field in the user registration form.
-				 *
-				 * @since WordPress 2.1.0
-				 */
-				do_action( 'register_form' ); ?>
-
-				<p id="reg_passmail">
-					<?php esc_html_e( 'La confirmation d’inscription vous sera envoyée par e-mail.', 'vingt-dixsept' ); ?>
-				</p>
-
-				<br class="clear" />
-
-				<p class="submit">
-					<input type="submit" name="wp-submit" id="wp-submit" disabled="disabled" class="button button-primary button-large" value="<?php esc_attr_e( 'Inscription', 'vingt-dixsept' ); ?>" />
-				</p>
-			</form>
-		<?php endif;
+		endswitch ;
 
 		get_template_part( 'template-parts/login', 'footer' );

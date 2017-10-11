@@ -6,6 +6,15 @@
  *
  * @since 1.1.0
  */
+
+if ( is_customize_preview() && is_multisite() && vingt_dixsept_is_main_site() && 'register' === vingt_dixsept_login_get_action() ) {
+	/**
+	 * Fires before the site sign-up form.
+	 *
+	 * @since WordPress 3.0.0
+	 */
+	do_action( 'before_signup_header' );
+}
 ?>
 <!DOCTYPE html>
 	<!--[if IE 8]>

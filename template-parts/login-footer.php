@@ -9,7 +9,7 @@
 
 	if ( 'activate' !== vingt_dixsept_login_get_action() ) :
 
-		if ( ! is_multisite() || is_customize_preview() ) : ?>
+		if ( ! is_multisite() || 'register' !== vingt_dixsept_login_get_action() ) : ?>
 			<p id="nav">
 				<?php vingt_dixsept_login_navigation(); ?>
 			</p>

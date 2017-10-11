@@ -726,6 +726,25 @@ function vingt_dixsept_is_main_site() {
 }
 
 /**
+ * Gets the active type of signups.
+ *
+ * @since  1.1.0
+ *
+ * @return string The active type of signups.
+ */
+function vingt_dixsept_active_signup() {
+	/**
+	 * Filters the type of site sign-up.
+	 *
+	 * @since WordPress 3.0.0
+	 *
+	 * @param string $active_signup String that returns registration type. The value can be
+	 *                              'all', 'none', 'blog', or 'user'.
+	 */
+	return apply_filters( 'wpmu_active_signup', get_site_option( 'registration', 'none' ) );
+}
+
+/**
  * Apply the signup/activate header hooks when requested.
  *
  * @since 1.1.0
@@ -998,12 +1017,12 @@ function vingt_dixsept_login_navigation() {
 	}
 
 	// urls
-	$login        = sprintf( '<a href="%1$s">%2$s</a>',
+	$login = sprintf( '<a href="%1$s">%2$s</a>',
 		esc_url( $url ),
 		esc_html__( 'Connexion', 'vingt-dixsept' )
 	);
 
-	$lostpass     = sprintf( '<a href="%1$s">%2$s</a>',
+	$lostpass = sprintf( '<a href="%1$s">%2$s</a>',
 		esc_url( add_query_arg( 'action', 'lostpassword', $url ) ),
 		esc_html__( 'Mot de passe oublié ?', 'vingt-dixsept' )
 	);
@@ -1144,6 +1163,7 @@ function vingt_dixsept_login_style() {
 			body.login {
 				background-image: url( %s );
 				background-size: cover;
+				background-repeat: no-repeat;
 			}
 
 			body.login p#nav, body.login p#backtoblog {
@@ -1162,7 +1182,7 @@ function vingt_dixsept_login_style() {
 
 	$ms_rule = '';
 
-	if ( ( did_action( 'before_signup_header') || did_action( 'activate_header') ) && vingt_dixsept_is_main_site() ) {
+	if ( ( did_action( 'before_signup_header' ) || did_action( 'activate_header' ) ) && vingt_dixsept_is_main_site() ) {
 		$ms_css = file_get_contents( sprintf( '%1$sms-register%2$s.css',
 			get_theme_file_path( 'assets/css/' ),
 			vingt_dixsept_js_css_suffix()
