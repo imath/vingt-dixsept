@@ -1208,17 +1208,18 @@ add_action( 'login_enqueue_scripts', 'vingt_dixsept_login_style', 9 );
  *
  * @since 1.1.0
  */
-function vingt_dixsept_signup_blogform_enqueue_js() {
+function vingt_dixsept_signup_form_enqueue_js() {
 	if ( ! vingt_dixsept_is_main_site() ) {
 		return;
 	}
 
 	$min = vingt_dixsept_js_css_suffix();
-  $vs  = vingt_dixsept();
+	$vs  = vingt_dixsept();
 
-	wp_enqueue_script( 'vingt_dixsept-blog-form', get_stylesheet_directory_uri() . "/assets/js/blog-form{$min}.js", array(), $vs->version, true );
+	wp_enqueue_script( 'vingt_dixsept-signup-form', get_stylesheet_directory_uri() . "/assets/js/signup-form{$min}.js", array(), $vs->version, true );
 }
-add_action( 'signup_blogform', 'vingt_dixsept_signup_blogform_enqueue_js' );
+add_action( 'signup_blogform',     'vingt_dixsept_signup_form_enqueue_js' );
+add_action( 'signup_extra_fields', 'vingt_dixsept_signup_form_enqueue_js' );
 
 /**
  * Make sure there's a version of the site icon for the login logo

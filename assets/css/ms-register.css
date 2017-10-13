@@ -183,3 +183,9 @@ body #signup-content h2:first-child {
 	margin-top: 0;
 	padding: 10px 24px;
 }
+
+#noemail-tips {
+	max-height: 70px;
+	overflow-y: scroll !important;
+	font-size: 11px;
+}
