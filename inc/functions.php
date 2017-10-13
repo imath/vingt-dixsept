@@ -864,6 +864,23 @@ function vingt_dixsept_the_maintenance_content() {
 }
 
 /**
+ * Use the Site's url for the login logo.
+ *
+ * @since  1.1.0
+ *
+ * @param  string $url URL of the login logo link.
+ * @return string      URL of the login logo link.
+ */
+function vingt_dixsept_login_logo_url( $url = '' ) {
+	if ( ! vingt_dixsept_is_main_site() ) {
+		return $url;
+	}
+
+	return home_url( '/' );
+}
+add_filter( 'login_headerurl', 'vingt_dixsept_login_logo_url' );
+
+/**
  * Gets the login's preview screen action.
  *
  * @since  1.1.0
