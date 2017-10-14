@@ -218,6 +218,60 @@ function vingt_dixsept_has_site_icon() {
 }
 
 /**
+ * Print WP Head scripts and styles of the customizer only.
+ *
+ * @since 1.1.0
+ */
+function vingt_dixsept_login_enqueue_customize_scripts() {
+	if ( ! is_customize_preview() ) {
+		return;
+	}
+
+	foreach ( array(
+		'_wp_render_title_tag'            => 1,
+		'wp_resource_hints'               => 2,
+		'feed_links'                      => 2,
+		'feed_links_extra'                => 3,
+		'rsd_link'                        => 10,
+		'wlwmanifest_link'                => 10,
+		'adjacent_posts_rel_link_wp_head' => 10,
+		'locale_stylesheet'               => 10,
+		'noindex'                         => 1,
+		'print_emoji_detection_script'    => 7,
+		'wp_print_styles'                 => 8,
+		'wp_print_head_scripts'           => 9,
+		'wp_generator'                    => 10,
+		'rel_canonical'                   => 10,
+		'wp_shortlink_wp_head'            => 10,
+		'wp_custom_css_cb'                => 101,
+		'wp_site_icon'                    => 99,
+		) as $hook => $priority ) {
+		remove_action( 'wp_head', $hook, $priority );
+	}
+
+	wp_head();
+
+	// Dequeue unneeded scripts
+	foreach ( wp_scripts()->queue as $script ) {
+		if ( 0 !== strpos( $script, 'customize-preview' ) && 0 !== strpos( $script, 'customize-selective-refresh' ) ) {
+			wp_dequeue_script( $script );
+		}
+	}
+
+	// Dequeue unneeded styles
+	foreach ( wp_styles()->queue as $style ) {
+		if ( 0 !== strpos( $style, 'customize-preview' ) && 0 !== strpos( $style, 'login' ) ) {
+			wp_dequeue_style( $style );
+		}
+	}
+
+	// Print remaining styles and scripts
+	wp_print_styles();
+	wp_print_head_scripts();
+}
+add_action( 'login_enqueue_scripts', 'vingt_dixsept_login_enqueue_customize_scripts' );
+
+/**
  * Load our custom controle JS File and global vars.
  *
  * @since 1.0.0
