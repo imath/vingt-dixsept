@@ -12,7 +12,7 @@
 					<h2>
 						<?php
 						/* translators: %s: name of the network */
-						printf( __( 'Obtenez votre propre compte %s en quelques secondes' ), get_network()->site_name );
+						printf( __( 'Obtenez votre propre compte %s en quelques secondes', 'vingt-dixsept' ), get_network()->site_name );
 						?>
 					</h2>
 					<form id="setupform">

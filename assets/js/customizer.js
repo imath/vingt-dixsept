@@ -10,7 +10,7 @@
 /* global vingtDixsept */
 
 ( function( $, api ) {
-	var previousUrl, clearPreviousUrl, previewUrlValue;
+	var previousUrl, clearPreviousUrl, setPreviewUrl, previewUrlValue;
 
 	clearPreviousUrl = function() {
 		previousUrl = null;
@@ -33,7 +33,7 @@
 				previewUrlValue.set( previousUrl );
 			}
 		}
-	}
+	};
 
 	api.section( 'theme_email', function( section ) {
 		previewUrlValue = api.previewer.previewUrl;

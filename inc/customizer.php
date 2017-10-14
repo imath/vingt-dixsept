@@ -154,7 +154,7 @@ function vingt_dixsept_customize_register( $wp_customize ) {
 		) );
 
 		$wp_customize->add_control( 'enable_login_logo', array(
-			'label'           => __( 'Remplacer le logo de WordPress par celui du site', 'vingt-dixsept' ),
+			'label'           => __( 'Remplacer le logo de WordPress par l’icône du site', 'vingt-dixsept' ),
 			'section'         => 'theme_login',
 			'type'            => 'radio',
 			'choices'         => array(

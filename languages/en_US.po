@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Vingt DixSept 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/imath/vingt-dixsept/issues\n"
-"POT-Creation-Date: 2017-10-03 18:50:00+00:00\n"
-"PO-Revision-Date: 2017-10-03 20:53+0100\n"
+"POT-Creation-Date: 2017-10-14 11:14:04+00:00\n"
+"PO-Revision-Date: 2017-10-14 13:14+0100\n"
 "Last-Translator: imath <mathchristo@yahoo.fr>\n"
 "Language-Team: FRENCH <contact@imathi.eu>\n"
 "Language: en_US\n"
@@ -19,82 +19,210 @@ msgstr ""
 msgid "Menu supérieur"
 msgstr "Top Menu"
 
-#: header-maintenance.php:36
+#: header-maintenance.php:36 inc/functions.php:944
 msgid "Se connecter"
 msgstr "Log in"
 
-#: inc/customizer.php:23
-msgid "Modèle d'email"
+#: inc/customizer.php:26
+msgid "Modèle d’email"
 msgstr "Email template"
 
-#: inc/customizer.php:35
+#: inc/customizer.php:38
 msgid "Intégrer le logo du site dans l’e-mail"
 msgstr "Use the site logo into the email header"
 
-#: inc/customizer.php:39 inc/customizer.php:57 inc/customizer.php:74
+#: inc/customizer.php:42 inc/customizer.php:60 inc/customizer.php:77
+#: inc/customizer.php:162 inc/customizer.php:180
 msgid "Oui"
 msgstr "Yes"
 
-#: inc/customizer.php:40 inc/customizer.php:58 inc/customizer.php:75
+#: inc/customizer.php:43 inc/customizer.php:61 inc/customizer.php:78
+#: inc/customizer.php:161 inc/customizer.php:179
 msgid "Non"
 msgstr "No"
 
-#: inc/customizer.php:53
+#: inc/customizer.php:56
 msgid "Intégrer le nom du site dans l’e-mail"
 msgstr "Use the site name into the email header"
 
-#: inc/customizer.php:70
+#: inc/customizer.php:73
 msgid "Intégrer les liens sociaux dans l’e-mail"
 msgstr "Use social links into the email footer"
 
-#: inc/customizer.php:98
+#: inc/customizer.php:101
 msgid "Couleur d’arrière plan de l’en-tête"
 msgstr "Header background color"
 
-#: inc/customizer.php:110
+#: inc/customizer.php:113
 msgid "Couleur de soulignement de l’en-tête"
 msgstr "Header underline color"
 
-#: inc/customizer.php:122
+#: inc/customizer.php:126
 msgid "Maintenance"
 msgstr "Maintenance"
 
-#: inc/customizer.php:126
+#: inc/customizer.php:130
 msgid "Pas de maintenance."
 msgstr "Maintenance off."
 
-#: inc/customizer.php:127
+#: inc/customizer.php:131
 msgid "Maintenance en cours."
 msgstr "Maintenance on."
 
-#: inc/functions.php:472
+#: inc/customizer.php:145 inc/functions.php:1318
+msgid "Formulaire de connexion"
+msgstr "Login form"
+
+#: inc/customizer.php:157
+msgid "Remplacer le logo de WordPress par l’icône du site"
+msgstr "Replace the WordPress logo with the site icon"
+
+#: inc/customizer.php:175
+msgid "Intégrer l’arrière plan du site."
+msgstr "Use the custom header of the site."
+
+#: inc/functions.php:495
 msgid "Lien utile"
 msgstr "Useful link"
 
-#: inc/functions.php:654
+#: inc/functions.php:677
 msgid "Site en cours de maintenance"
 msgstr "Site under maintenance"
 
-#: inc/functions.php:778
+#: inc/functions.php:920 inc/functions.php:1039
+msgid "Connexion"
+msgstr "Log in"
+
+#: inc/functions.php:924
+msgid "Mot de passe oublié"
+msgstr "Lost Password"
+
+#: inc/functions.php:926 inc/functions.php:1050
+#: template-parts/login-register.php:38
+msgid "Inscription"
+msgstr "Register"
+
+#: inc/functions.php:928
+msgid "Activation"
+msgstr "Activation"
+
+#: inc/functions.php:996
+msgid "https://fr.wordpress.org/"
+msgstr "https://wordpress.org/"
+
+#: inc/functions.php:1014
+msgid "Propulsé par WordPress"
+msgstr "Powered by WordPress"
+
+#: inc/functions.php:1044
+msgid "Mot de passe oublié ?"
+msgstr "Lost Password ?"
+
+#: inc/functions.php:1288
 msgid "Modèle d’e-mail"
 msgstr "Email template"
 
-#: inc/functions.php:781
+#: inc/functions.php:1290
 msgid ""
 "Vous pouvez personnaliser le gabarit utilisé pour envoyer les e-mails de "
 "WordPress."
 msgstr ""
 "You can customize the template that will be used when WordPress sends emails."
 
-#: inc/functions.php:782
+#: inc/functions.php:1291
 msgid "Pour cela utilisez la colonne latérale pour spécifier vos préférences."
 msgstr "Use the left sidebar to define your preferences."
 
-#: inc/functions.php:783
+#: inc/functions.php:1292
 msgid ""
 "Voici comment seront affichés les <a href=\"#\">liens</a> contenus dans "
 "certains e-mails."
 msgstr "Here is how <a href=\"#\">links</a> will be displayed in your emails."
+
+#: inc/functions.php:1320
+msgid ""
+"Cet article est utilisé pour personnaliser l’apparence du formulaire de "
+"connexion."
+msgstr "This post is used to customize the login template."
+
+#: template-parts/login-header.php:64
+msgid ""
+"Veuillez saisir votre identifiant ou votre adresse de messagerie. Un lien "
+"permettant de créer un nouveau mot de passe vous sera envoyé par e-mail."
+msgstr ""
+"Please enter your username or email address. You will receive a link to "
+"create a new password via email."
+
+#: template-parts/login-header.php:68
+msgid "S’inscrire sur ce site"
+msgstr "Register For This Site"
+
+#: template-parts/login-login.php:13 template-parts/login-lostpassword.php:14
+msgid "Nom d’utilisateur ou adresse e-mail"
+msgstr "Username or Email Address"
+
+#: template-parts/login-login.php:18
+msgid "Mot de passe"
+msgstr "Password"
+
+#: template-parts/login-login.php:32
+msgid "Se souvenir de moi"
+msgstr "Remember Me"
+
+#: template-parts/login-lostpassword.php:27
+msgid "Générer un mot de passe"
+msgstr "Get New Password"
+
+#. translators: %s: name of the network
+#: template-parts/login-msregister.php:15
+msgid "Obtenez votre propre compte %s en quelques secondes"
+msgstr "Get your own %s account in seconds"
+
+#: template-parts/login-msregister.php:19
+msgid "Identifiant :"
+msgstr "Username:"
+
+#: template-parts/login-msregister.php:22
+msgid ""
+"(Doit contenir au moins 4 caractères, uniquement des lettres ou des "
+"chiffres.)"
+msgstr "(Must be at least 4 characters, letters and numbers only.)"
+
+#: template-parts/login-msregister.php:24
+msgid "Adresse e-mail :"
+msgstr "Email&nbsp;Address:"
+
+#: template-parts/login-msregister.php:27
+msgid ""
+"Nous enverrons votre confirmation d’inscription à cette adresse. Vérifiez "
+"donc bien qu’elle est correcte avant de continuer."
+msgstr ""
+"We send your registration email to this address. Double-check your email "
+"address before continuing."
+
+#: template-parts/login-msregister.php:32
+msgid "Donnez-moi un site !"
+msgstr "Gimme a site!"
+
+#: template-parts/login-msregister.php:35
+msgid "Juste l’identifiant, s’il vous plaît."
+msgstr "Just a username, please."
+
+#: template-parts/login-msregister.php:40
+msgid "Suivant"
+msgstr "Next"
+
+#: template-parts/login-register.php:13
+msgid "Identifiant"
+msgstr "Username"
+
+#: template-parts/login-register.php:18
+msgid "Adresse de messagerie"
+msgstr "Email Address"
+
+#: template-parts/login-register.php:32
+msgid "La confirmation d’inscription vous sera envoyée par e-mail."
+msgstr "Registration confirmation will be emailed to you."
 
 #. Theme Name of the plugin/theme
 msgid "Vingt DixSept"
@@ -119,3 +247,8 @@ msgstr "imath"
 #. Author URI of the plugin/theme
 msgid "https://imathi.eu"
 msgstr "https://imathi.eu"
+
+#: template-parts/login-footer.php:20
+msgctxt "site"
+msgid "&larr; Retour vers %s"
+msgstr "&larr; Back to %s"

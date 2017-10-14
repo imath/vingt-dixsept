@@ -35,7 +35,7 @@
 					var grandsons = signupForm.childNodes[ child ].childNodes;
 
 					if ( grandsons ) {
-						grandsons.forEach( function( grandson ) {
+						grandsons.forEach( function( grandson ) { // jshint ignore:line
 							if ( ! grandson.attributes ) {
 								return;
 							} else if ( 'site-language' === grandson.getAttribute( 'id' ) ) {
@@ -55,7 +55,7 @@
 			// Reorganize the User form.
 			} else if ( document.querySelector( '#user_name' ) ) {
 				if ( signupForm.childNodes[ child ].nodeName && 'BR' === signupForm.childNodes[ child ].nodeName ) {
-					var b = signupForm.childNodes[ child ], t = signupForm.childNodes[ child ].nextSibling
+					var b = signupForm.childNodes[ child ], t = signupForm.childNodes[ child ].nextSibling,
 					    p = signupForm.childNodes[ child ].previousSibling;
 
 					if ( t && p.getAttribute( 'name' ) ) {

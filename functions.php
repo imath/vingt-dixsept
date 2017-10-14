@@ -53,7 +53,7 @@ final class VingtDixSept {
 	 * @since  1.0.0
 	 */
 	private function globals() {
-		$this->version = '1.1.0-alpha';
+		$this->version = '1.1.0-beta';
 	}
 
 	/**

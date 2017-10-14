@@ -993,7 +993,7 @@ function vingt_dixsept_login_url() {
 		 *
 		 * @param string $login_header_url Login header logo URL.
 		 */
-		apply_filters( 'login_headerurl', __( 'https://wordpress.org/', 'vingt-dixsept' ) )
+		apply_filters( 'login_headerurl', __( 'https://fr.wordpress.org/', 'vingt-dixsept' ) )
 	) );
 }
 
@@ -1011,7 +1011,7 @@ function vingt_dixsept_login_title() {
 		 *
 		 * @param string $login_header_title Login header logo title attribute.
 		 */
-		apply_filters( 'login_headertitle', __( 'Powered by WordPress', 'vingt-dixsept' ) )
+		apply_filters( 'login_headertitle', __( 'Propulsé par WordPress', 'vingt-dixsept' ) )
 	) );
 }
 
