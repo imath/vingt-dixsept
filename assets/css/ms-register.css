@@ -150,6 +150,7 @@ body #signup-content h2:first-child {
 
 .wp-activate-container #signup-welcome,
 .wp-activate-container p.view,
+.wp-activate-container p.lead-in,
 .validate-blog-signup #signup-content .wp-signup-container > p:not( .error ),
 .validate-blog-signup #signup-content .wp-signup-container > h2:not(:first-child),
 .validate-blog-signup #signup-content .wp-signup-container > ul,
@@ -174,6 +175,10 @@ body #signup-content h2:first-child {
 .wp-activate-container p.view {
 	margin-top: 0;
 	padding-top: 0;
+}
+
+.wp-activate-container p.lead-in {
+	padding-bottom: 26px;
 }
 
 .validate-blog-signup #signup-content .wp-signup-container > p:not(:first-child),
