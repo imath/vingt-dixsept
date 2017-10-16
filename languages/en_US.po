@@ -2,10 +2,10 @@
 # This file is distributed under the GNU General Public License v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Vingt DixSept 1.0.0\n"
+"Project-Id-Version: Vingt DixSept 1.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/imath/vingt-dixsept/issues\n"
-"POT-Creation-Date: 2017-10-14 12:14:21+00:00\n"
-"PO-Revision-Date: 2017-10-14 14:15+0100\n"
+"POT-Creation-Date: 2017-10-16 02:59:09+00:00\n"
+"PO-Revision-Date: 2017-10-16 05:00+0100\n"
 "Last-Translator: imath <mathchristo@yahoo.fr>\n"
 "Language-Team: FRENCH <contact@imathi.eu>\n"
 "Language: en_US\n"
