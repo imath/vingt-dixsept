@@ -184,8 +184,13 @@ function vingt_dixsept_email_set_html_content( $text ) {
 		}
 	}
 
+	// Make sure the Post won't be embed.
+	add_filter( 'pre_oembed_result', '__return_false' );
+
 	$pagetitle = esc_attr( get_bloginfo( 'name', 'display' ) );
 	$content   = apply_filters( 'the_content', $text );
+
+	remove_filter( 'pre_oembed_result', '__return_false' );
 
 	// Make links clickable
 	$content = make_clickable( $content );
