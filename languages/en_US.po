@@ -2,10 +2,10 @@
 # This file is distributed under the GNU General Public License v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Vingt DixSept 1.1.0\n"
+"Project-Id-Version: Vingt DixSept 1.1.1\n"
 "Report-Msgid-Bugs-To: https://github.com/imath/vingt-dixsept/issues\n"
-"POT-Creation-Date: 2017-10-16 02:59:09+00:00\n"
-"PO-Revision-Date: 2017-10-16 05:00+0100\n"
+"POT-Creation-Date: 2017-11-30 04:17:46+00:00\n"
+"PO-Revision-Date: 2017-11-30 05:19+0100\n"
 "Last-Translator: imath <mathchristo@yahoo.fr>\n"
 "Language-Team: FRENCH <contact@imathi.eu>\n"
 "Language: en_US\n"
@@ -19,7 +19,7 @@ msgstr ""
 msgid "Menu supérieur"
 msgstr "Top Menu"
 
-#: header-maintenance.php:36 inc/functions.php:944
+#: header-maintenance.php:36 inc/functions.php:949
 msgid "Se connecter"
 msgstr "Log in"
 
@@ -69,7 +69,7 @@ msgstr "Maintenance off."
 msgid "Maintenance en cours."
 msgstr "Maintenance on."
 
-#: inc/customizer.php:145 inc/functions.php:1318
+#: inc/customizer.php:145 inc/functions.php:1323
 msgid "Formulaire de connexion"
 msgstr "Login form"
 
@@ -81,65 +81,65 @@ msgstr "Replace the WordPress logo with the site icon"
 msgid "Intégrer l’arrière plan du site."
 msgstr "Use the custom header of the site."
 
-#: inc/functions.php:495
+#: inc/functions.php:500
 msgid "Lien utile"
 msgstr "Useful link"
 
-#: inc/functions.php:677
+#: inc/functions.php:682
 msgid "Site en cours de maintenance"
 msgstr "Site under maintenance"
 
-#: inc/functions.php:920 inc/functions.php:1039
+#: inc/functions.php:925 inc/functions.php:1044
 msgid "Connexion"
 msgstr "Log in"
 
-#: inc/functions.php:924
+#: inc/functions.php:929
 msgid "Mot de passe oublié"
 msgstr "Lost Password"
 
-#: inc/functions.php:926 inc/functions.php:1050
+#: inc/functions.php:931 inc/functions.php:1055
 #: template-parts/login-register.php:38
 msgid "Inscription"
 msgstr "Register"
 
-#: inc/functions.php:928
+#: inc/functions.php:933
 msgid "Activation"
 msgstr "Activation"
 
-#: inc/functions.php:996
+#: inc/functions.php:1001
 msgid "https://fr.wordpress.org/"
 msgstr "https://wordpress.org/"
 
-#: inc/functions.php:1014
+#: inc/functions.php:1019
 msgid "Propulsé par WordPress"
 msgstr "Powered by WordPress"
 
-#: inc/functions.php:1044
+#: inc/functions.php:1049
 msgid "Mot de passe oublié ?"
 msgstr "Lost Password ?"
 
-#: inc/functions.php:1288
+#: inc/functions.php:1293
 msgid "Modèle d’e-mail"
 msgstr "Email template"
 
-#: inc/functions.php:1290
+#: inc/functions.php:1295
 msgid ""
 "Vous pouvez personnaliser le gabarit utilisé pour envoyer les e-mails de "
 "WordPress."
 msgstr ""
 "You can customize the template that will be used when WordPress sends emails."
 
-#: inc/functions.php:1291
+#: inc/functions.php:1296
 msgid "Pour cela utilisez la colonne latérale pour spécifier vos préférences."
 msgstr "Use the left sidebar to define your preferences."
 
-#: inc/functions.php:1292
+#: inc/functions.php:1297
 msgid ""
 "Voici comment seront affichés les <a href=\"#\">liens</a> contenus dans "
 "certains e-mails."
 msgstr "Here is how <a href=\"#\">links</a> will be displayed in your emails."
 
-#: inc/functions.php:1320
+#: inc/functions.php:1325
 msgid ""
 "Cet article est utilisé pour personnaliser l’apparence du formulaire de "
 "connexion."

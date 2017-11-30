@@ -1,5 +1,15 @@
 # Change Log
 
+## 1.1.1
+
+_Requires WordPress 4.7 & TwentySeventeen_
+
+### Bug fixes
+
++ Makes sure a post permalink added to the email content will not be WP Embedded.
+
+---
+
 ## 1.1.0
 
 _Requires WordPress 4.7 & TwentySeventeen_
