@@ -1,5 +1,13 @@
 # Change Log
 
+## 1.1.2
+
+_Requires WordPress 4.7 & TwentySeventeen_
+
+### Bug fixes
+
++ Use a "GitHub Theme URI:" style.css header tag for the Theme.
+
 ## 1.1.1
 
 _Requires WordPress 4.7 & TwentySeventeen_
