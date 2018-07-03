@@ -294,3 +294,20 @@ function vingt_dixsept_customize_control_js() {
 	) );
 }
 add_action( 'customize_controls_enqueue_scripts', 'vingt_dixsept_customize_control_js' );
+
+/**
+ * Forces the page layout to be "one-column" if Gutenberg is active
+ *
+ * @since 1.2.0
+ *
+ * @param  string $page_layout The twentyseventeen page layout.
+ * @return string              The Vingt DixSept page layout.
+ */
+function vingt_dixsept_gutenberg_page_layout( $page_layout = '' ) {
+	if ( vingt_dixsept()->is_gutenberg_active ) {
+		$page_layout = 'one-column';
+	}
+
+	return $page_layout;
+}
+add_filter( 'theme_mod_page_layout', 'vingt_dixsept_gutenberg_page_layout' );

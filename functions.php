@@ -51,9 +51,11 @@ final class VingtDixSept {
 	 * Set some globals for the theme
 	 *
 	 * @since  1.0.0
+	 * @since  1.2.0 Add a global to check if Gutenberg is active.
 	 */
 	private function globals() {
-		$this->version = '1.1.2';
+		$this->version             = '1.2.0-alpha';
+		$this->is_gutenberg_active = function_exists( 'the_gutenberg_project' );
 	}
 
 	/**

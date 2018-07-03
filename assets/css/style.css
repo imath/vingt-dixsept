@@ -124,3 +124,22 @@ body.has-header-image.home.blog.wp-custom-logo .custom-logo-link {
 		height: auto;
 	}
 }
+
+@media screen and (min-width: 48em) {
+	body.is-gutenberg-active.blog:not(.has-sidebar) #primary article,
+	body.is-gutenberg-active:not(.has-sidebar) .page-header {
+		float: none;
+		width: auto;
+	}
+
+	body.is-gutenberg-active:not(.has-sidebar) .page-header {
+		margin-bottom: 4em;
+	}
+
+	body.is-gutenberg-active.blog:not(.has-sidebar) #primary,
+	body.is-gutenberg-active:not(.has-sidebar) .page-header {
+		margin-left: auto;
+		margin-right: auto;
+		max-width: 740px;
+	}
+}

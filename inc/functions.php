@@ -1334,3 +1334,48 @@ function vingt_dixsept_upgrade() {
 	update_option( 'vingt_dixsept_version', $version );
 }
 add_action( 'admin_init', 'vingt_dixsept_upgrade', 1000 );
+
+/**
+ * Unregister the "sidebar-1" if Gutenberg is active.
+ *
+ * @since 1.2.0
+ */
+function vingt_dixsept_unregister_sidebar_1() {
+	unregister_sidebar( 'sidebar-1' );
+}
+add_action( 'widgets_init', 'vingt_dixsept_unregister_sidebar_1', 11 );
+
+/**
+ * Force the "sidebar-1" to be inactive if Gutenberg is.
+ *
+ * @since 1.2.0
+ *
+ * @param  boolean $is_active     Whether the sidebar is active or not.
+ * @param  string  $sidebar_index The sidebar ID.
+ * @return boolean                Whether the "sidebar-1" is active or not.
+ */
+function vingt_dixsept_gutenberg_sidebar_1( $is_active = false, $sidebar_index = '' ) {
+	if ( $is_active && 'sidebar-1' === $sidebar_index ) {
+		$is_active = ! vingt_dixsept()->is_gutenberg_active;
+	}
+
+	return $is_active;
+}
+add_filter( 'is_active_sidebar', 'vingt_dixsept_gutenberg_sidebar_1', 10, 2 );
+
+/**
+ * Add a class to the body tag to inform Gutenberg is active.
+ *
+ * @since 1.2.0
+ *
+ * @param  array $classes The classes of the body tag.
+ * @return array          The classes of the body tag.
+ */
+function vingt_dixsept_body_classes( $classes = array() ) {
+	if ( vingt_dixsept()->is_gutenberg_active ) {
+		$classes[] = 'is-gutenberg-active';
+	}
+
+	return $classes;
+}
+add_filter( 'body_class', 'vingt_dixsept_body_classes' );
