@@ -31,6 +31,7 @@ final class VingtDixSept {
 	private function __construct() {
 		$this->globals();
 		$this->inc();
+		$this->setup_supports();
 	}
 
 	/**
@@ -72,6 +73,23 @@ final class VingtDixSept {
 
 		// Translations
 		load_theme_textdomain( 'vingt-dixsept', get_theme_file_path( '/languages' ) );
+	}
+
+	/**
+	 * Set up Gutenberg supports.
+	 *
+	 * @since 1.2.0
+	 */
+	private function setup_supports() {
+		if ( ! $this->is_gutenberg_active ) {
+			return;
+		}
+
+		// Adding support for core block visual styles.
+		add_theme_support( 'wp-block-styles' );
+
+		// Add support for full and wide align images.
+		add_theme_support( 'align-wide' );
 	}
 }
 /**

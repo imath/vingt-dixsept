@@ -57,6 +57,36 @@ function vingt_dixsept_enqueue_styles() {
 add_action( 'wp_enqueue_scripts', 'vingt_dixsept_enqueue_styles' );
 
 /**
+ * Enqueues the Child Theme's specific CSS for Gutenberg blocks.
+ *
+ * @since 1.2.0
+ */
+function vingt_dixsept_enqueue_blocks_style() {
+	$current_screen = null;
+
+	if ( function_exists( 'get_current_screen' ) ) {
+		$current_screen = get_current_screen();
+	}
+
+	$min = vingt_dixsept_js_css_suffix();
+	$vs  = vingt_dixsept();
+
+	// Editor context.
+	if ( ! empty( $current_screen->post_type ) ) {
+		return;
+	}
+
+	// Front-end only.
+	wp_enqueue_style(
+		'blocks-style',
+		get_stylesheet_directory_uri() . "/assets/css/blocks{$min}.css",
+		array( 'wp-core-blocks' ),
+		$vs->version
+	);
+}
+add_action( 'enqueue_block_assets', 'vingt_dixsept_enqueue_blocks_style' );
+
+/**
  * Enqueues the Theme's embed CSS.
  *
  * @since 1.0.0
