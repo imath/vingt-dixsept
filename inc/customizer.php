@@ -132,6 +132,14 @@ function vingt_dixsept_customize_register( $wp_customize ) {
 		),
 	) );
 
+	/**
+	 * Remove the TwentySeventeen page layout control, when Gutenberg is active
+	 * as we force it to be 'one-column'.
+	 */
+	if ( vingt_dixsept()->is_gutenberg_active ) {
+		$wp_customize->remove_control( 'page_layout' );
+	}
+
 	$wp_customize->selective_refresh->add_partial( 'maintenance_mode', array(
 		'selector'         => '#maintenance-mode',
 		'render_callback'  => 'vingt_dixsept_display_maintenance_mode_info',
@@ -278,7 +286,7 @@ add_action( 'login_enqueue_scripts', 'vingt_dixsept_login_enqueue_customize_scri
  */
 function vingt_dixsept_customize_control_js() {
 	$min = vingt_dixsept_js_css_suffix();
-  $vs  = vingt_dixsept();
+	$vs  = vingt_dixsept();
 
 	$email_tpl = (int) get_option( 'vingt_dixsept_email_id' );
 	$login_tpl = (int) get_option( 'vingt_dixsept_login_id' );
