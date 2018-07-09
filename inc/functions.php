@@ -78,13 +78,44 @@ function vingt_dixsept_enqueue_blocks_style() {
 
 	// Front-end only.
 	wp_enqueue_style(
-		'blocks-style',
+		'vingt-dixsept-blocks-style',
 		get_stylesheet_directory_uri() . "/assets/css/blocks{$min}.css",
 		array( 'wp-core-blocks' ),
 		$vs->version
 	);
 }
 add_action( 'enqueue_block_assets', 'vingt_dixsept_enqueue_blocks_style' );
+
+/**
+ * Enqueues the Gutenberg editor styles.
+ *
+ * @since 1.2.0
+ */
+function vingt_dixsept_enqueue_editor_style() {
+	$font_urls = twentyseventeen_fonts_url();
+	$min       = vingt_dixsept_js_css_suffix();
+	$vs        = vingt_dixsept();
+	$deps      = array();
+
+	if ( $font_urls && ! wp_style_is( 'twentyseventeen-fonts', 'registered' ) ) {
+		wp_register_style(
+			'twentyseventeen-fonts',
+			$font_urls,
+			array(),
+			null
+		);
+
+		$deps = array( 'twentyseventeen-fonts' );
+	}
+
+	wp_enqueue_style(
+		'vingt-dixsept-editor-style',
+		get_stylesheet_directory_uri() . "/assets/css/editor{$min}.css",
+		$deps,
+		$vs->version
+	);
+}
+add_action( 'enqueue_block_editor_assets', 'vingt_dixsept_enqueue_editor_style' );
 
 /**
  * Enqueues the Theme's embed CSS.

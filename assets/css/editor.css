@@ -1,0 +1,51 @@
+.edit-post-visual-editor * {
+    font-family: "Libre Franklin", "Helvetica Neue", helvetica, arial, sans-serif !important;
+	font-size: 16px;
+	font-size: 1rem;
+	font-weight: 400;
+    line-height: 1.66;
+    color: #333;
+}
+
+.edit-post-visual-editor h1 {
+	font-size: 24px;
+	font-size: 1.5rem;
+	font-weight: 300;
+}
+
+.edit-post-visual-editor h2 {
+	color: #666;
+	font-size: 20px;
+	font-size: 1.25rem;
+	font-weight: 300;
+}
+
+.edit-post-visual-editor h3 {
+	color: #333;
+	font-size: 18px;
+	font-size: 1.125rem;
+	font-weight: 300;
+}
+
+.edit-post-visual-editor h4 {
+	color: #333;
+	font-size: 16px;
+	font-size: 1rem;
+	font-weight: 800;
+}
+
+.edit-post-visual-editor h5 {
+	color: #767676;
+	font-size: 13px;
+	font-size: 0.8125rem;
+	font-weight: 800;
+	letter-spacing: 0.15em;
+	text-transform: uppercase;
+}
+
+.edit-post-visual-editor h6 {
+	color: #333;
+	font-size: 15px;
+	font-size: 0.9375rem;
+	font-weight: 800;
+}
