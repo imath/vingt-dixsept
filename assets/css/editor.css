@@ -7,6 +7,14 @@
     color: #333;
 }
 
+.edit-post-visual-editor .components-placeholder * {
+    font-family: apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+	font-size: 13px;
+	font-weight: inherit;
+    line-height: inherit;
+    color: inherit;
+}
+
 .edit-post-visual-editor h1 {
 	font-size: 24px;
 	font-size: 1.5rem;
