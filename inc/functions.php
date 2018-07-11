@@ -83,6 +83,24 @@ function vingt_dixsept_enqueue_blocks_style() {
 		array( 'wp-core-blocks' ),
 		$vs->version
 	);
+
+	// Block custom colors.
+	$block_colors = '';
+	foreach ( $vs->get_colors() as $color ) {
+		$block_colors .= sprintf( '
+			.has-%1$s-background-color {
+				background-color: %2$s;
+			}
+
+			.has-%1$s-color {
+				color: %2$s;
+			}
+			%3$s
+		', $color['slug'], $color['color'], "\n" );
+	}
+
+	// Add Palette custom colors
+	wp_add_inline_style( 'vingt-dixsept-blocks-style', $block_colors );
 }
 add_action( 'enqueue_block_assets', 'vingt_dixsept_enqueue_blocks_style' );
 
