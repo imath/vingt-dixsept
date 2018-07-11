@@ -132,6 +132,30 @@ function vingt_dixsept_enqueue_editor_style() {
 		$deps,
 		$vs->version
 	);
+
+	// Custom colors for headings
+	$colors = $vs->get_colors();
+
+	$heading_colors = sprintf( '
+		.edit-post-visual-editor h1,
+		.edit-post-visual-editor .editor-post-title__input,
+		.edit-post-visual-editor h3,
+		.edit-post-visual-editor h4,
+		.edit-post-visual-editor h6 {
+			color: %1$s;
+		}
+
+		.edit-post-visual-editor h2{
+			color: %2$s;
+		}
+
+		.edit-post-visual-editor h5 {
+			color: %3$s;
+		}
+	', $colors['#333']['color'], $colors['#666']['color'], $colors['#767676']['color'] );
+
+	// Add Palette custom colors
+	wp_add_inline_style( 'vingt-dixsept-editor-style', $heading_colors );
 }
 add_action( 'enqueue_block_editor_assets', 'vingt_dixsept_enqueue_editor_style' );
 
