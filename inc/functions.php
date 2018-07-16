@@ -145,7 +145,9 @@ function vingt_dixsept_enqueue_editor_style() {
 			color: %1$s;
 		}
 
-		.edit-post-visual-editor h2{
+		.edit-post-visual-editor h2,
+		.wp-block-pullquote p,
+		.edit-post-visual-editor .wp-block-quote p {
 			color: %2$s;
 		}
 
