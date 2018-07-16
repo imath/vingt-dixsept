@@ -2,6 +2,18 @@
 	display: flex;
 }
 
+.wp-block-button .wp-block-button__link {
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+	font-weight: bold;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+}
+
+.entry-content .wp-block-button .wp-block-button__link:hover {
+	color: #FFF;
+}
+
 /* Specific styles for Gutenberg blocks */
 @media screen and (min-width: 48em) {
 	/**

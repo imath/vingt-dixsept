@@ -150,7 +150,7 @@ final class VingtDixSept {
 		$base_hsl           = 'hsl( ' . $hue . ', %1$s, %2$s )';
 		$custom_colors      = array(
 			'#000'    => sprintf( $base_hsl, $saturation, '0%' ),
-			'#222'    => sprintf( $base_hsl, $saturation, '20%' ),
+			'#222'    => sprintf( $base_hsl, $saturation, '13%' ),
 			'#333'    => sprintf( $base_hsl, $reduced_saturation, '20%' ),
 			'#666'    => sprintf( $base_hsl, $saturation, '40%' ),
 			'#767676' => sprintf( $base_hsl, $saturation, '46%' ),
