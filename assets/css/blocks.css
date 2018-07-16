@@ -1,3 +1,7 @@
+.wp-block-cover-image.aligncenter {
+	display: flex;
+}
+
 /* Specific styles for Gutenberg blocks */
 @media screen and (min-width: 48em) {
 	/**
