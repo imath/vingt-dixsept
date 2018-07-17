@@ -1500,3 +1500,17 @@ function vingt_dixsept_body_classes( $classes = array() ) {
 	return $classes;
 }
 add_filter( 'body_class', 'vingt_dixsept_body_classes' );
+
+/**
+ * Force embed tweets to be centered.
+ *
+ * @since  1.2.0
+ */
+function vingt_dixsept_fetch_url( $provider = '' ) {
+	if ( false !== strpos( $provider, 'https://publish.twitter.com/oembed' ) ) {
+		$provider = add_query_arg( 'align', 'center', $provider );
+	}
+
+	return $provider;
+}
+add_filter( 'oembed_fetch_url', 'vingt_dixsept_fetch_url', 10, 1 );
