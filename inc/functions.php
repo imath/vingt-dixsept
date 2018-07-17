@@ -53,6 +53,23 @@ function vingt_dixsept_enqueue_styles() {
 		array( 'parent-style' ),
 		$vs->version
 	);
+
+	// Adapt Embed height and width according to available space.
+	wp_add_inline_script( 'twentyseventeen-global', '
+		( function( $ ) {
+			$.each( $( \'.wp-block-embed\' ), function( i, figure ) {
+				if ( $( figure ).hasClass( \'alignfull\' ) || $( figure ).hasClass( \'alignwide\' ) ) {
+					var iframe = $( figure ).find( $( \'iframe\' ) ), aspectRatio;
+
+					if ( iframe.width() !== iframe.prop( \'width\' ) ) {
+						aspectRatio = iframe.prop( \'width\' ) / iframe.prop( \'height\' );
+						iframe.prop( \'height\', iframe.width() / aspectRatio );
+						iframe.prop( \'width\', iframe.width() );
+					}
+				}
+			} );
+		} )( jQuery );
+	' );
 }
 add_action( 'wp_enqueue_scripts', 'vingt_dixsept_enqueue_styles' );
 

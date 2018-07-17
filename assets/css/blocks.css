@@ -24,6 +24,10 @@
 	padding-left: .5em;
 }
 
+.wp-block-embed iframe {
+	width: 100%;
+}
+
 /* Specific styles for Gutenberg blocks */
 @media screen and (min-width: 48em) {
 	/**
