@@ -55,7 +55,7 @@ final class VingtDixSept {
 	 * @since  1.2.0 Add a global to check if Gutenberg is active.
 	 */
 	private function globals() {
-		$this->version             = '1.2.0-alpha';
+		$this->version             = '1.2.0-beta';
 		$this->is_gutenberg_active = function_exists( 'the_gutenberg_project' );
 	}
 
