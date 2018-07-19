@@ -122,15 +122,26 @@ function vingt_dixsept_enqueue_blocks_style() {
 
 	// Buttons
 	$block_colors .= sprintf( '
-		.wp-block-button .wp-block-button__link:not(.has-background) {
+		.wp-block-button .wp-block-button__link:not(.has-background),
+		.wp-block-file a.wp-block-file__button,
+		.colors-custom .wp-block-file a.wp-block-file__button {
 			background-color: %1$s;
 		}
 
-		.wp-block-button .wp-block-button__link:not(.has-background):hover {
-			background-color: %2$s;
+		.wp-block-button .wp-block-button__link:not(.has-text-color),
+		.wp-block-file a.wp-block-file__button,
+		.colors-custom .wp-block-file a.wp-block-file__button {
+			color: %3$s;
 		}
-		%3$s
-	', $colors['#222']['color'], $colors['#767676']['color'], "\n" );
+
+		.wp-block-button .wp-block-button__link:hover,
+		.wp-block-file a.wp-block-file__button:hover,
+		.colors-custom .wp-block-file a.wp-block-file__button:hover {
+			background-color: %2$s;
+			color: %1$s;
+		}
+		%4$s
+	', $colors['#222']['color'], $colors['#767676']['color'], $colors['#fff']['color'], "\n" );
 
 	// Add Palette custom colors
 	wp_add_inline_style( 'vingt-dixsept-blocks-style', $block_colors );
@@ -169,7 +180,7 @@ function vingt_dixsept_enqueue_editor_style() {
 	// Custom colors for headings
 	$colors = $vs->get_colors();
 
-	$heading_colors = sprintf( '
+	$editor_colors = sprintf( '
 		.edit-post-visual-editor h1,
 		.edit-post-visual-editor .editor-post-title__input,
 		.edit-post-visual-editor h3,
@@ -187,10 +198,33 @@ function vingt_dixsept_enqueue_editor_style() {
 		.edit-post-visual-editor h5 {
 			color: %3$s;
 		}
-	', $colors['#333']['color'], $colors['#666']['color'], $colors['#767676']['color'] );
+
+		.wp-block-button .wp-block-button__link:not(.has-background),
+		.wp-block-file__button {
+			background-color: %5$s;
+		}
+
+		.wp-block-button .wp-block-button__link:not(.has-text-color),
+		.wp-block-file__button {
+			color: %4$s;
+		}
+
+		.wp-block-button .wp-block-button__link:hover,
+		.wp-block-file__button:hover {
+			background-color: %3$s !important;
+			color: %5$s !important;
+		}
+		%6$s',
+		$colors['#333']['color'],
+		$colors['#666']['color'],
+		$colors['#767676']['color'],
+		$colors['#fff']['color'],
+		$colors['#222']['color'],
+		"\n"
+	);
 
 	// Add Palette custom colors
-	wp_add_inline_style( 'vingt-dixsept-editor-style', $heading_colors );
+	wp_add_inline_style( 'vingt-dixsept-editor-style', $editor_colors );
 }
 add_action( 'enqueue_block_editor_assets', 'vingt_dixsept_enqueue_editor_style' );
 

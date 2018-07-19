@@ -2,7 +2,8 @@
 	display: flex;
 }
 
-.wp-block-button .wp-block-button__link {
+.wp-block-button .wp-block-button__link,
+.wp-block-file__button {
 	-webkit-border-radius: 2px;
 	border-radius: 2px;
 	font-weight: bold;
@@ -10,7 +11,8 @@
 	box-shadow: none !important;
 }
 
-.entry-content .wp-block-button .wp-block-button__link:hover {
+.entry-content .wp-block-button .wp-block-button__link:hover
+.entry-content .wp-block-file__button:hover {
 	color: #FFF;
 }
 
