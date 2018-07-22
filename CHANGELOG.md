@@ -1,5 +1,17 @@
 # Change Log
 
+## 1.2.0
+
+_Requires WordPress 4.7 or up & TwentySeventeen_
+
+### Features
+
++ Adapts TwentySeventeen for the Gutenberg project's modern editor:
+ + one column layout,
+ + supports wide alignments,
+ + supports blocks custom colors palette,
+ + includes editor styles.
+
 ## 1.1.2
 
 _Requires WordPress 4.7 & TwentySeventeen_

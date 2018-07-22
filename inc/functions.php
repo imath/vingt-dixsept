@@ -53,8 +53,180 @@ function vingt_dixsept_enqueue_styles() {
 		array( 'parent-style' ),
 		$vs->version
 	);
+
+	// Adapt Embed height and width according to available space.
+	wp_add_inline_script( 'twentyseventeen-global', '
+		( function( $ ) {
+			$.each( $( \'.wp-block-embed\' ), function( i, figure ) {
+				if ( $( figure ).hasClass( \'alignfull\' ) || $( figure ).hasClass( \'alignwide\' ) ) {
+					var iframe = $( figure ).find( $( \'iframe\' ) ), aspectRatio;
+
+					if ( iframe.width() !== iframe.prop( \'width\' ) ) {
+						aspectRatio = iframe.prop( \'width\' ) / iframe.prop( \'height\' );
+						iframe.prop( \'height\', iframe.width() / aspectRatio );
+						iframe.prop( \'width\', iframe.width() );
+					}
+				}
+			} );
+		} )( jQuery );
+	' );
 }
 add_action( 'wp_enqueue_scripts', 'vingt_dixsept_enqueue_styles' );
+
+/**
+ * Enqueues the Child Theme's specific CSS for Gutenberg blocks.
+ *
+ * @since 1.2.0
+ */
+function vingt_dixsept_enqueue_blocks_style() {
+	$current_screen = null;
+
+	if ( function_exists( 'get_current_screen' ) ) {
+		$current_screen = get_current_screen();
+	}
+
+	$min = vingt_dixsept_js_css_suffix();
+	$vs  = vingt_dixsept();
+
+	// Editor context.
+	if ( ! empty( $current_screen->post_type ) ) {
+		return;
+	}
+
+	// Front-end only.
+	wp_enqueue_style(
+		'vingt-dixsept-blocks-style',
+		get_stylesheet_directory_uri() . "/assets/css/blocks{$min}.css",
+		array( 'wp-core-blocks' ),
+		$vs->version
+	);
+
+	// Block custom colors.
+	$block_colors = '';
+	$colors       = $vs->get_colors();
+
+	foreach ( $colors as $color ) {
+		$block_colors .= sprintf( '
+			.has-%1$s-background-color,
+			.colors-custom .has-%1$s-background-color {
+				background-color: %2$s;
+			}
+
+			.has-%1$s-color,
+			.colors-custom .has-%1$s-color {
+				color: %2$s;
+			}
+			%3$s
+		', $color['slug'], $color['color'], "\n" );
+	}
+
+	// Buttons
+	$block_colors .= sprintf( '
+		.wp-block-button .wp-block-button__link:not(.has-background),
+		.wp-block-file a.wp-block-file__button,
+		.colors-custom .wp-block-file a.wp-block-file__button {
+			background-color: %1$s;
+		}
+
+		.wp-block-button .wp-block-button__link:not(.has-text-color),
+		.wp-block-file a.wp-block-file__button,
+		.colors-custom .wp-block-file a.wp-block-file__button {
+			color: %3$s;
+		}
+
+		.wp-block-button .wp-block-button__link:hover,
+		.wp-block-file a.wp-block-file__button:hover,
+		.colors-custom .wp-block-file a.wp-block-file__button:hover {
+			background-color: %2$s;
+			color: %1$s;
+		}
+		%4$s
+	', $colors['#222']['color'], $colors['#767676']['color'], $colors['#fff']['color'], "\n" );
+
+	// Add Palette custom colors
+	wp_add_inline_style( 'vingt-dixsept-blocks-style', $block_colors );
+}
+add_action( 'enqueue_block_assets', 'vingt_dixsept_enqueue_blocks_style' );
+
+/**
+ * Enqueues the Gutenberg editor styles.
+ *
+ * @since 1.2.0
+ */
+function vingt_dixsept_enqueue_editor_style() {
+	$font_urls = twentyseventeen_fonts_url();
+	$min       = vingt_dixsept_js_css_suffix();
+	$vs        = vingt_dixsept();
+	$deps      = array();
+
+	if ( $font_urls && ! wp_style_is( 'twentyseventeen-fonts', 'registered' ) ) {
+		wp_register_style(
+			'twentyseventeen-fonts',
+			$font_urls,
+			array(),
+			null
+		);
+
+		$deps = array( 'twentyseventeen-fonts' );
+	}
+
+	wp_enqueue_style(
+		'vingt-dixsept-editor-style',
+		get_stylesheet_directory_uri() . "/assets/css/editor{$min}.css",
+		$deps,
+		$vs->version
+	);
+
+	// Custom colors for headings
+	$colors = $vs->get_colors();
+
+	$editor_colors = sprintf( '
+		.edit-post-visual-editor h1,
+		.edit-post-visual-editor .editor-post-title__input,
+		.edit-post-visual-editor h3,
+		.edit-post-visual-editor h4,
+		.edit-post-visual-editor h6 {
+			color: %1$s;
+		}
+
+		.edit-post-visual-editor h2,
+		.wp-block-pullquote p,
+		.edit-post-visual-editor .wp-block-quote p {
+			color: %2$s;
+		}
+
+		.edit-post-visual-editor h5 {
+			color: %3$s;
+		}
+
+		.wp-block-button .wp-block-button__link:not(.has-background),
+		.wp-block-file__button {
+			background-color: %5$s;
+		}
+
+		.wp-block-button .wp-block-button__link:not(.has-text-color),
+		.wp-block-file__button {
+			color: %4$s;
+		}
+
+		.wp-block-button .wp-block-button__link:hover,
+		.wp-block-file__button:hover {
+			background-color: %3$s !important;
+			color: %5$s !important;
+		}
+		%6$s',
+		$colors['#333']['color'],
+		$colors['#666']['color'],
+		$colors['#767676']['color'],
+		$colors['#fff']['color'],
+		$colors['#222']['color'],
+		"\n"
+	);
+
+	// Add Palette custom colors
+	wp_add_inline_style( 'vingt-dixsept-editor-style', $editor_colors );
+}
+add_action( 'enqueue_block_editor_assets', 'vingt_dixsept_enqueue_editor_style' );
 
 /**
  * Enqueues the Theme's embed CSS.
@@ -1334,3 +1506,62 @@ function vingt_dixsept_upgrade() {
 	update_option( 'vingt_dixsept_version', $version );
 }
 add_action( 'admin_init', 'vingt_dixsept_upgrade', 1000 );
+
+/**
+ * Unregister the "sidebar-1" if Gutenberg is active.
+ *
+ * @since 1.2.0
+ */
+function vingt_dixsept_unregister_sidebar_1() {
+	unregister_sidebar( 'sidebar-1' );
+}
+add_action( 'widgets_init', 'vingt_dixsept_unregister_sidebar_1', 11 );
+
+/**
+ * Force the "sidebar-1" to be inactive if Gutenberg is.
+ *
+ * @since 1.2.0
+ *
+ * @param  boolean $is_active     Whether the sidebar is active or not.
+ * @param  string  $sidebar_index The sidebar ID.
+ * @return boolean                Whether the "sidebar-1" is active or not.
+ */
+function vingt_dixsept_gutenberg_sidebar_1( $is_active = false, $sidebar_index = '' ) {
+	if ( $is_active && 'sidebar-1' === $sidebar_index ) {
+		$is_active = ! vingt_dixsept()->is_gutenberg_active;
+	}
+
+	return $is_active;
+}
+add_filter( 'is_active_sidebar', 'vingt_dixsept_gutenberg_sidebar_1', 10, 2 );
+
+/**
+ * Add a class to the body tag to inform Gutenberg is active.
+ *
+ * @since 1.2.0
+ *
+ * @param  array $classes The classes of the body tag.
+ * @return array          The classes of the body tag.
+ */
+function vingt_dixsept_body_classes( $classes = array() ) {
+	if ( vingt_dixsept()->is_gutenberg_active ) {
+		$classes[] = 'is-gutenberg-active';
+	}
+
+	return $classes;
+}
+add_filter( 'body_class', 'vingt_dixsept_body_classes' );
+
+/**
+ * Force embed tweets to be centered.
+ *
+ * @since  1.2.0
+ */
+function vingt_dixsept_fetch_url( $provider = '' ) {
+	if ( false !== strpos( $provider, 'https://publish.twitter.com/oembed' ) ) {
+		$provider = add_query_arg( 'align', 'center', $provider );
+	}
+
+	return $provider;
+}
+add_filter( 'oembed_fetch_url', 'vingt_dixsept_fetch_url', 10, 1 );

@@ -2,24 +2,60 @@
 # This file is distributed under the GNU General Public License v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Vingt DixSept 1.1.2\n"
+"Project-Id-Version: Vingt DixSept 1.2.0\n"
 "Report-Msgid-Bugs-To: https://github.com/imath/vingt-dixsept/issues\n"
-"POT-Creation-Date: 2018-06-07 08:11:05+00:00\n"
-"PO-Revision-Date: 2018-06-07 10:14+0100\n"
+"POT-Creation-Date: 2018-07-22 08:52:49+00:00\n"
+"PO-Revision-Date: 2018-07-22 10:55+0100\n"
 "Last-Translator: imath <mathchristo@yahoo.fr>\n"
 "Language-Team: FRENCH <contact@imathi.eu>\n"
 "Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.7\n"
+"X-Generator: Poedit 1.7.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: functions.php:88
+msgid "Noir"
+msgstr "Black"
+
+#: functions.php:93
+msgid "Très sombre"
+msgstr "Very dark"
+
+#: functions.php:98
+msgid "Sombre"
+msgstr "Dark"
+
+#: functions.php:103
+msgid "Très foncé"
+msgstr "Very dusky"
+
+#: functions.php:108
+msgid "Foncé"
+msgstr "Dusky"
+
+#: functions.php:113
+msgid "Assez clair"
+msgstr "Pretty clear"
+
+#: functions.php:118
+msgid "Clair"
+msgstr "Clear"
+
+#: functions.php:123
+msgid "Très clair"
+msgstr "Very clear"
+
+#: functions.php:128
+msgid "Blanc"
+msgstr "White"
 
 #: header-maintenance.php:30
 msgid "Menu supérieur"
 msgstr "Top Menu"
 
-#: header-maintenance.php:36 inc/functions.php:949
+#: header-maintenance.php:36 inc/functions.php:1121
 msgid "Se connecter"
 msgstr "Log in"
 
@@ -32,12 +68,12 @@ msgid "Intégrer le logo du site dans l’e-mail"
 msgstr "Use the site logo into the email header"
 
 #: inc/customizer.php:42 inc/customizer.php:60 inc/customizer.php:77
-#: inc/customizer.php:162 inc/customizer.php:180
+#: inc/customizer.php:170 inc/customizer.php:188
 msgid "Oui"
 msgstr "Yes"
 
 #: inc/customizer.php:43 inc/customizer.php:61 inc/customizer.php:78
-#: inc/customizer.php:161 inc/customizer.php:179
+#: inc/customizer.php:169 inc/customizer.php:187
 msgid "Non"
 msgstr "No"
 
@@ -69,77 +105,77 @@ msgstr "Maintenance off."
 msgid "Maintenance en cours."
 msgstr "Maintenance on."
 
-#: inc/customizer.php:145 inc/functions.php:1323
+#: inc/customizer.php:153 inc/functions.php:1495
 msgid "Formulaire de connexion"
 msgstr "Login form"
 
-#: inc/customizer.php:157
+#: inc/customizer.php:165
 msgid "Remplacer le logo de WordPress par l’icône du site"
 msgstr "Replace the WordPress logo with the site icon"
 
-#: inc/customizer.php:175
+#: inc/customizer.php:183
 msgid "Intégrer l’arrière plan du site."
 msgstr "Use the custom header of the site."
 
-#: inc/functions.php:500
+#: inc/functions.php:672
 msgid "Lien utile"
 msgstr "Useful link"
 
-#: inc/functions.php:682
+#: inc/functions.php:854
 msgid "Site en cours de maintenance"
 msgstr "Site under maintenance"
 
-#: inc/functions.php:925 inc/functions.php:1044
+#: inc/functions.php:1097 inc/functions.php:1216
 msgid "Connexion"
 msgstr "Log in"
 
-#: inc/functions.php:929
+#: inc/functions.php:1101
 msgid "Mot de passe oublié"
 msgstr "Lost Password"
 
-#: inc/functions.php:931 inc/functions.php:1055
+#: inc/functions.php:1103 inc/functions.php:1227
 #: template-parts/login-register.php:38
 msgid "Inscription"
 msgstr "Register"
 
-#: inc/functions.php:933
+#: inc/functions.php:1105
 msgid "Activation"
 msgstr "Activation"
 
-#: inc/functions.php:1001
+#: inc/functions.php:1173
 msgid "https://fr.wordpress.org/"
 msgstr "https://wordpress.org/"
 
-#: inc/functions.php:1019
+#: inc/functions.php:1191
 msgid "Propulsé par WordPress"
 msgstr "Powered by WordPress"
 
-#: inc/functions.php:1049
+#: inc/functions.php:1221
 msgid "Mot de passe oublié ?"
 msgstr "Lost Password ?"
 
-#: inc/functions.php:1293
+#: inc/functions.php:1465
 msgid "Modèle d’e-mail"
 msgstr "Email template"
 
-#: inc/functions.php:1295
+#: inc/functions.php:1467
 msgid ""
 "Vous pouvez personnaliser le gabarit utilisé pour envoyer les e-mails de "
 "WordPress."
 msgstr ""
 "You can customize the template that will be used when WordPress sends emails."
 
-#: inc/functions.php:1296
+#: inc/functions.php:1468
 msgid "Pour cela utilisez la colonne latérale pour spécifier vos préférences."
 msgstr "Use the left sidebar to define your preferences."
 
-#: inc/functions.php:1297
+#: inc/functions.php:1469
 msgid ""
 "Voici comment seront affichés les <a href=\"#\">liens</a> contenus dans "
 "certains e-mails."
 msgstr "Here is how <a href=\"#\">links</a> will be displayed in your emails."
 
-#: inc/functions.php:1325
+#: inc/functions.php:1497
 msgid ""
 "Cet article est utilisé pour personnaliser l’apparence du formulaire de "
 "connexion."
