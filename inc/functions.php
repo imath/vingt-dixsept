@@ -97,7 +97,7 @@ function vingt_dixsept_enqueue_blocks_style() {
 	wp_enqueue_style(
 		'vingt-dixsept-blocks-style',
 		get_stylesheet_directory_uri() . "/assets/css/blocks{$min}.css",
-		array( 'wp-core-blocks' ),
+		array( 'wp-block-library' ),
 		$vs->version
 	);
 
