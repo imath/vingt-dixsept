@@ -1,5 +1,14 @@
 # Change Log
 
+## 1.1.2
+
+_Requires WordPress 4.7 & TwentySeventeen_
+
+### Bug fixes
+
++ Make sure the styles for Gutenberg blocks are enqueued on front-end.
++ Make sure the editor styles does not override block toolbar icons' color.
+
 ## 1.2.0
 
 _Requires WordPress 4.7 or up & TwentySeventeen_

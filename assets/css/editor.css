@@ -19,6 +19,10 @@
 	color: inherit;
 }
 
+.edit-post-visual-editor .components-toolbar__control * {
+	color: inherit;
+}
+
 .edit-post-visual-editor h1 {
 	font-size: 24px;
 	font-size: 1.5rem;
